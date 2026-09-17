@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Track Order #{{ order.id }} | Café{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/orders.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="tracking-page">
+
+    <div class="tracking-header">
+
+        <div class="container">
+
+            <span class="eyebrow">
+                ORDER TRACKING
+            </span>
+
+            <h1>
+                Order #{{ order.id }}
+            </h1>
+
+            <p>
+                Placed on {{ order.created_at|date:"d M Y, h:i A" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="container tracking-container">
+
+        <!-- STATUS -->
+
+        <div class="tracking-card">
+
+            <div class="tracking-title">
+
+                <div>
+                    <span class="section-label">
+                        ORDER STATUS
+                    </span>
+
+                    <h2>
+                        {{ order.get_status_display }}
+                    </h2>
+                </div>
+
+                <span class="current-status {{ order.status }}">
+                    {{ order.get_status_display }}
+                </span>
+
+            </div>
+
+
+            {% if order.status == 'cancelled' %}
+
+                <div class="cancelled-box">
+
+                    <div class="status-icon">
+                        ×
+                    </div>
+
+                    <div>
+                        <h3>Order Cancelled</h3>
+
+                        <p>
+                            {{ status_message }}
+                        </p>
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="status-timeline">
+
+                    {% for step in status_steps %}
+
+                        {% if forloop.counter0 < current_index %}
+
+                            <div class="timeline-step completed">
+
+                                <div class="timeline-dot">
+                                    ✓
+                                </div>
+
+                                <div class="timeline-content">
+                                    <strong>{{ step.1 }}</strong>
+                                </div>
+
+                            </div>
+
+                        {% elif forloop.counter0 == current_index %}
+
+                            <div class="timeline-step active">
+
+                                <div class="timeline-dot">
+                                    ●
+                                </div>
+
+                                <div class="timeline-content">
+                                    <strong>{{ step.1 }}</strong>
+
+                                    <span>
+                                        {{ status_message }}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="timeline-step">
+
+                                <div class="timeline-dot">
+                                    ○
+                                </div>
+
+                                <div class="timeline-content">
+                                    <strong>{{ step.1 }}</strong>
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ORDER ITEMS -->
+
+        <div class="tracking-grid">
+
+            <div class="order-items-card">
+
+                <div class="card-heading">
+                    <span class="section-label">
+                        YOUR ITEMS
+                    </span>
+
+                    <h2>Order Details</h2>
+                </div>
+
+
+                <div class="tracking-items">
+
+                    {% for item in order.items.all %}
+
+                    <div class="tracking-item">
+
+                        <div class="tracking-item-image">
+
+                            {% if item.menu_item.image %}
+
+                                <img
+                                    src="{{ item.menu_item.image.url }}"
+                                    alt="{{ item.menu_item.name }}"
+                                >
+
+                            {% else %}
+
+                                <span>☕</span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="tracking-item-info">
+
+                            <h3>
+                                {{ item.menu_item.name }}
+                            </h3>
+
+                            <p>
+                                Quantity: {{ item.quantity }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="tracking-item-price">
+
+                            ₹{{ item.subtotal }}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <aside class="order-summary-card">
+
+                <div class="card-heading">
+
+                    <span class="section-label">
+                        SUMMARY
+                    </span>
+
+                    <h2>Your Order</h2>
+
+                </div>
+
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong>
+                        ₹{{ order.total_amount }}
+                    </strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <strong class="free">
+                        FREE
+                    </strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+
+                    <strong>
+                        ₹{{ order.total_amount }}
+                    </strong>
+                </div>
+
+
+                <a
+                    href="{% url 'my_orders' %}"
+                    class="back-orders"
+                >
+                    ← Back to My Orders
+                </a>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

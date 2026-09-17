@@ -1,0 +1,42 @@
+{% if messages %}
+
+<div class="toast-container">
+
+    {% for message in messages %}
+
+        <div
+            class="toast-message {{ message.tags }}"
+            id="toast-{{ forloop.counter }}"
+        >
+
+            <div class="toast-icon">
+                ✓
+            </div>
+
+            <div class="toast-content">
+
+                <strong>
+                    Success
+                </strong>
+
+                <p>
+                    {{ message }}
+                </p>
+
+            </div>
+
+            <button
+                class="toast-close"
+                onclick="closeToast('toast-{{ forloop.counter }}')"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}

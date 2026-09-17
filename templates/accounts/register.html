@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register | Cafe
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>
+        Create Account
+    </h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div>
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                required
+            >
+        </div>
+
+        <div>
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                required
+            >
+        </div>
+
+        <div>
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                required
+            >
+        </div>
+
+        <div>
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                name="password2"
+                required
+            >
+        </div>
+
+        <button
+            type="submit"
+            class="btn"
+        >
+            Register
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

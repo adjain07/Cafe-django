@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Gallery | Cafe
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/gallery.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="gallery-section">
+
+    <div class="gallery-container">
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="gallery-filters">
+
+            <a
+                href="{% url 'gallery' %}"
+                class="gallery-filter
+                {% if not selected_category %}active{% endif %}"
+            >
+                All
+            </a>
+
+
+            {% for category in categories %}
+
+                <a
+                    href="?category={{ category.slug }}"
+                    class="gallery-filter
+                    {% if selected_category == category.slug %}
+                        active
+                    {% endif %}"
+                >
+                    {{ category.name }}
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+
+
+        <!-- GALLERY -->
+
+        {% if images %}
+
+            <div class="gallery-grid">
+
+                {% for image in images %}
+
+                    <div class="gallery-card">
+
+                        <img
+                            src="{{ image.image.url }}"
+                            alt="{{ image.title }}"
+                        >
+
+
+                        <div class="gallery-overlay">
+
+                            <h3>
+                                {{ image.title }}
+                            </h3>
+
+                            {% if image.description %}
+
+                                <p>
+                                    {{ image.description }}
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- EMPTY GALLERY -->
+
+            <div class="gallery-coming-soon">
+
+                <h1>
+                    Gallery Coming Soon
+                </h1>
+
+                <p>
+                    We're preparing some beautiful
+                    moments to share with you.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Orders | Café{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/orders.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="orders-page">
+
+    <div class="orders-header">
+        <div class="container">
+            <span class="eyebrow">YOUR ACCOUNT</span>
+            <h1>My Orders</h1>
+            <p>View your previous orders and track current orders.</p>
+        </div>
+    </div>
+
+    <div class="container orders-container">
+
+        {% if orders %}
+
+            <div class="orders-list">
+
+                {% for order in orders %}
+
+                <div class="order-card">
+
+                    <div class="order-card-top">
+
+                        <div>
+                            <span class="order-label">ORDER</span>
+
+                            <h2>
+                                #{{ order.id }}
+                            </h2>
+
+                            <p>
+                                {{ order.created_at|date:"d M Y, h:i A" }}
+                            </p>
+                        </div>
+
+                        <div class="order-status {{ order.status }}">
+                            {{ order.get_status_display }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-card-middle">
+
+                        <div class="order-info">
+                            <span>Items</span>
+                            <strong>
+                                {{ order.items.count }}
+                            </strong>
+                        </div>
+
+                        <div class="order-info">
+                            <span>Total</span>
+                            <strong>
+                                ₹{{ order.total_amount }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-card-bottom">
+
+                        <a
+                            href="{% url 'order_detail' order.id %}"
+                            class="track-btn"
+                        >
+                            Track Order
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="no-orders">
+
+                <div class="no-orders-icon">
+                    🛍️
+                </div>
+
+                <h2>No Orders Yet</h2>
+
+                <p>
+                    You haven't placed any orders yet.
+                    Explore our menu and find something delicious.
+                </p>
+
+                <a href="{% url 'menu' %}" class="menu-btn">
+                    Explore Menu
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

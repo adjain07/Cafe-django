@@ -1,0 +1,334 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fffaf5;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+main {
+    min-height: 70vh;
+}
+
+h1,
+h2,
+h3 {
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    margin: 8px 4px;
+    background: #6f4e37;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+form {
+    max-width: 600px;
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.site-footer {
+    background: #22170f;
+    color: #fdf4ea;
+    padding: 56px 20px 24px;
+    border-top: 1px solid rgba(255, 238, 222, 0.12);
+}
+
+.footer-container {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-brand {
+    flex: 1 1 260px;
+}
+
+.footer-brand h3 {
+    color: #fffaf5;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(30px, 3vw, 38px);
+    margin: 0 0 10px;
+}
+
+.footer-brand p {
+    color: #e7d8c9;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 360px;
+    margin: 0;
+}
+
+.footer-links,
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.footer-links a,
+.footer-social a {
+    color: #f9eedd;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+    color: #f0b672;
+}
+
+.footer-bottom {
+    width: min(1200px, calc(100% - 48px));
+    margin: 28px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 238, 222, 0.16);
+    color: #d8b798;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 0.14em;
+}
+
+.messages {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.message {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.menu-card {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.cart-item {
+    padding: 20px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 8px;
+}
+
+/* =========================================
+   TOAST NOTIFICATION
+========================================= */
+
+.toast-container {
+    position: fixed;
+
+    top: 90px;
+
+    right: 25px;
+
+    z-index: 9999;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    width: 360px;
+
+    max-width: calc(100% - 30px);
+}
+
+
+.toast-message {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 16px 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e0d9;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, 0.15);
+
+    animation:
+        toastSlideIn 0.4s ease;
+}
+
+
+.toast-icon {
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #211a16;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+.toast-content {
+    flex: 1;
+}
+
+
+.toast-content strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #211a16;
+
+    font-size: 14px;
+}
+
+
+.toast-content p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.toast-close {
+    border: none;
+
+    background: transparent;
+
+    color: #777;
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    padding: 3px;
+}
+
+
+.toast-close:hover {
+    color: #211a16;
+}
+
+
+@keyframes toastSlideIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .toast-container {
+        top: 75px;
+
+        right: 15px;
+
+        width: auto;
+
+        left: 15px;
+
+        max-width: none;
+    }
+
+}

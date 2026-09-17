@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/home.css' %}"
+>
+
+{% endblock %}
+
+{% block title %}
+Home | Cafe
+{% endblock %}
+
+{% block content %}
+
+<section class="home-hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            The Craft Cafe
+        </span>
+
+        <h1>
+            Fresh moments, beautifully brewed.
+        </h1>
+
+        <p class="hero-copy">
+            Coffee, kitchen, and warm hospitality.
+        </p>
+
+        <div class="hero-actions">
+
+            <a
+                href="{% url 'menu' %}"
+                class="btn btn-primary"
+            >
+                Explore Menu
+            </a>
+
+            <a
+                href="{% url 'contact' %}"
+                class="btn btn-outline"
+            >
+                Visit Us
+            </a>
+
+        </div>
+
+        <div class="hero-proof">
+
+            <div class="proof-item">
+                <span class="proof-value">07+</span>
+                <span class="proof-label">Years</span>
+            </div>
+
+            <div class="proof-item">
+                <span class="proof-value">30+</span>
+                <span class="proof-label">Specialties</span>
+            </div>
+
+            <div class="proof-item">
+                <span class="proof-value">Daily</span>
+                <span class="proof-label">Fresh Roasts</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="home-features">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                Our Experience
+            </span>
+
+            <h2>
+                Made for slow mornings and joyful evenings
+            </h2>
+
+        </div>
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+
+                <span class="feature-icon">
+                    ☕
+                </span>
+
+                <h3>
+                    Artisan Coffee
+                </h3>
+
+                <p>
+                    Smooth roasts and balanced brews.
+                </p>
+
+            </article>
+
+            <article class="feature-card">
+
+                <span class="feature-icon">
+                    🍕
+                </span>
+
+                <h3>
+                    Fresh Kitchen
+                </h3>
+
+                <p>
+                    Comfort classics and seasonal plates.
+                </p>
+
+            </article>
+
+            <article class="feature-card">
+
+                <span class="feature-icon">
+                    🍰
+                </span>
+
+                <h3>
+                    Sweet Moments
+                </h3>
+
+                <p>
+                    Cakes and desserts made to share.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ item.name }} | Cafe
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="menu-detail-section">
+
+    <div class="menu-detail-container">
+
+        <div class="menu-detail-card">
+
+            <!-- PRODUCT IMAGE -->
+            <div class="menu-detail-image-wrapper">
+
+                {% if item.image %}
+                    <img
+                        src="{{ item.image.url }}"
+                        alt="{{ item.name }}"
+                        class="menu-detail-image"
+                    >
+                {% else %}
+                    <div class="menu-detail-no-image">
+                        <span>☕</span>
+                        <p>No Image Available</p>
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- PRODUCT INFORMATION -->
+            <div class="menu-detail-content">
+
+                <span class="menu-detail-category">
+                    {{ item.category.name }}
+                </span>
+
+                <h1>{{ item.name }}</h1>
+
+                <div class="menu-detail-price">
+                    ₹{{ item.price }}
+                </div>
+
+                <div class="menu-detail-line"></div>
+
+                <p class="menu-detail-description">
+                    {{ item.description }}
+                </p>
+
+                <div class="menu-detail-actions">
+
+                    <a
+                        href="{% url 'add_to_cart' item.id %}"
+                        class="menu-detail-cart-btn"
+                    >
+                        <span>Add to Cart</span>
+                        <span class="cart-plus">+</span>
+                    </a>
+
+                    <a
+                        href="{% url 'menu' %}"
+                        class="menu-detail-back-btn"
+                    >
+                        ← Back to Menu
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Your Cart | Café{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+
+    <!-- Page Header -->
+    <div class="cart-header">
+        <div class="container">
+            <span class="cart-eyebrow">YOUR ORDER</span>
+            <h1>Your Shopping Cart</h1>
+            <p>Review your items before placing your order.</p>
+        </div>
+    </div>
+
+    <div class="container cart-container">
+
+        {% if cart_items %}
+
+        <div class="cart-layout">
+
+            <!-- LEFT : CART ITEMS -->
+            <div class="cart-items-section">
+
+                <div class="cart-section-heading">
+                    <div>
+                        <h2>Your Items</h2>
+                        <span>{{ cart_items|length }} item{{ cart_items|length|pluralize }}</span>
+                    </div>
+
+                    <a href="{% url 'menu' %}" class="continue-shopping">
+                        ← Continue Shopping
+                    </a>
+                </div>
+
+                <div class="cart-items">
+
+                    {% for item in cart_items %}
+
+                    <div class="cart-item">
+
+                        <!-- Product Image -->
+                        <div class="cart-item-image">
+
+                            {% if item.menu_item.image %}
+                                <img src="{{ item.menu_item.image.url }}"
+                                     alt="{{ item.menu_item.name }}">
+                            {% else %}
+                                <div class="image-placeholder">
+                                    ☕
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <!-- Product Information -->
+                        <div class="cart-item-info">
+
+                            <span class="item-category">
+                                {{ item.menu_item.category.name }}
+                            </span>
+
+                            <h3>
+                                {{ item.menu_item.name }}
+                            </h3>
+
+                            <p class="item-description">
+                                {{ item.menu_item.description|truncatechars:90 }}
+                            </p>
+
+                            <span class="item-price">
+                                ₹{{ item.price }}
+                            </span>
+
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="cart-quantity">
+
+                            <span class="quantity-label">Quantity</span>
+
+                            <div class="quantity-box">
+                                <button type="button"
+                                        class="quantity-btn"
+                                        disabled>
+                                    −
+                                </button>
+
+                                <span>{{ item.quantity }}</span>
+
+                                <button type="button"
+                                        class="quantity-btn"
+                                        disabled>
+                                    +
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- Subtotal -->
+                        <div class="cart-item-total">
+
+                            <span class="total-label">Subtotal</span>
+
+                            <strong>
+                                ₹{{ item.subtotal }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <!-- Bottom Note -->
+                <div class="cart-note">
+                    <span class="note-icon">✓</span>
+
+                    <div>
+                        <strong>Freshly prepared for you</strong>
+                        <p>
+                            Your order will be prepared fresh once confirmed.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT : ORDER SUMMARY -->
+            <aside class="order-summary">
+
+                <div class="summary-header">
+                    <span>ORDER SUMMARY</span>
+                    <h2>Your Order</h2>
+                </div>
+
+                <div class="summary-items">
+
+                    {% for cart_item in cart_items %}
+                    <div class="summary-item">
+
+                        <div>
+                            <span>{{ cart_item.item.name }}</span>
+                            <small>× {{ cart_item.quantity }}</small>
+                        </div>
+
+                        <strong>
+                            ₹{{ cart_item.subtotal }}
+                        </strong>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>₹{{ total }}</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span class="free">FREE</span>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong>₹{{ total }}</strong>
+                </div>
+
+                <a href="{% url 'checkout' %}" class="checkout-btn">
+                    <span>Proceed to Checkout</span>
+                    <span>→</span>
+                </a>
+
+                <div class="secure-checkout">
+                    <span>🔒</span>
+                    <p>Secure checkout · Freshly prepared</p>
+                </div>
+
+            </aside>
+
+        </div>
+
+        {% else %}
+
+        <!-- EMPTY CART -->
+
+        <div class="empty-cart">
+
+            <div class="empty-cart-icon">
+                🛒
+            </div>
+
+            <span class="cart-eyebrow">YOUR CART</span>
+
+            <h2>Your Cart is Empty</h2>
+
+            <p>
+                Looks like you haven't added anything yet.
+                Explore our menu and discover something delicious.
+            </p>
+
+            <a href="{% url 'menu' %}" class="browse-menu-btn">
+                Explore Our Menu
+                <span>→</span>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

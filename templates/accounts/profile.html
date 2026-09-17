@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Profile | Cafe
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-section">
+
+    <div class="profile-container">
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-header">
+
+            <span class="profile-eyebrow">
+                MY ACCOUNT
+            </span>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                Manage your account details and quickly access your orders.
+            </p>
+
+        </div>
+
+
+        <!-- PROFILE CARD -->
+
+        <div class="profile-card">
+
+            <!-- PROFILE INTRO -->
+
+            <div class="profile-intro">
+
+                <div class="profile-avatar">
+                    <span>☕</span>
+                </div>
+
+                <div class="profile-intro-text">
+
+                    <span class="profile-small-label">
+                        WELCOME BACK
+                    </span>
+
+                    <h2>
+                        {{ user.username }}
+                    </h2>
+
+                    <p>
+                        Thanks for being part of our cafe.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACCOUNT DETAILS -->
+
+            <div class="profile-details">
+
+                <div class="profile-detail-item">
+
+                    <div class="profile-detail-icon">
+                        👤
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Username
+                        </span>
+
+                        <strong>
+                            {{ user.username }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <div class="profile-detail-icon">
+                        ✉
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Email Address
+                        </span>
+
+                        <strong>
+                            {% if user.email %}
+                                {{ user.email }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-detail-item">
+
+                    <div class="profile-detail-icon">
+                        ♟
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Full Name
+                        </span>
+
+                        <strong>
+                            {% if user.get_full_name %}
+                                {{ user.get_full_name }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTION -->
+
+            <div class="profile-action">
+
+                <a
+                    href="{% url 'my_orders' %}"
+                    class="profile-orders-btn"
+                >
+                    <span>
+                        View My Orders
+                    </span>
+
+                    <span class="profile-arrow">
+                        →
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOT NOTE -->
+
+        <div class="profile-footer-note">
+
+            <span>☕</span>
+
+            <p>
+                Fresh coffee, delicious food and a warm experience.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

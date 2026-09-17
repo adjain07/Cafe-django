@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Our Menu | Cafe
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/menu.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================
+     MENU HERO
+===================================== -->
+
+<section class="menu-hero">
+
+    <div class="menu-hero-content">
+
+        <span class="menu-eyebrow">
+            OUR MENU
+        </span>
+
+        <h1>
+            Made With Passion
+        </h1>
+
+        <p>
+            Fresh ingredients, carefully crafted dishes,
+            and flavors worth coming back for.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     MENU SECTION
+===================================== -->
+
+<section class="menu-section">
+
+    <div class="menu-container">
+
+
+        <!-- SECTION HEADING -->
+
+        <div class="menu-heading">
+
+            <span>
+                EXPLORE OUR MENU
+            </span>
+
+            <h2>
+                Something for Everyone
+            </h2>
+
+            <p>
+                From freshly brewed coffee to delicious meals
+                and indulgent desserts.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================
+             CATEGORY FILTER
+        ================================== -->
+
+        <div class="menu-filters">
+
+            <a
+                href="{% url 'menu' %}"
+                class="
+                    menu-filter
+                    {% if not selected_category %}
+                        active
+                    {% endif %}
+                "
+            >
+                All
+            </a>
+
+
+            {% for category in categories %}
+
+                <a
+                    href="?category={{ category.id }}"
+                    class="
+                        menu-filter
+                        {% if selected_category == category.id|stringformat:'s' %}
+                            active
+                        {% endif %}
+                    "
+                >
+                    {{ category.name }}
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+
+
+        <!-- =================================
+             MENU ITEMS
+        ================================== -->
+
+        {% if items %}
+
+            <div class="menu-grid">
+
+                {% for item in items %}
+
+                    <article class="menu-card">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="menu-image-wrapper">
+
+                            {% if item.image %}
+
+                                <img
+                                    src="{{ item.image.url }}"
+                                    alt="{{ item.name }}"
+                                    class="menu-image"
+                                >
+
+                            {% else %}
+
+                                <div class="menu-no-image">
+                                    No Image
+                                </div>
+
+                            {% endif %}
+
+
+
+                            <!-- FEATURED -->
+
+                            {% if item.is_featured %}
+
+                                <span class="featured-badge">
+                                    Chef's Choice
+                                </span>
+
+                            {% endif %}
+
+
+
+                            <!-- CATEGORY -->
+
+                            <span class="menu-category-badge">
+                                {{ item.category.name }}
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- CONTENT -->
+
+                        <div class="menu-card-content">
+
+                            <div class="menu-card-top">
+
+                                <h3>
+                                    {{ item.name }}
+                                </h3>
+
+                                <span class="menu-price">
+                                    ₹{{ item.price }}
+                                </span>
+
+                            </div>
+
+
+                            <p class="menu-description">
+                                {{ item.description }}
+                            </p>
+
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="menu-actions">
+
+                                <a
+                                    href="{% url 'menu_detail' item.id %}"
+                                    class="view-menu-btn"
+                                >
+                                    View Details
+                                </a>
+
+                                <a
+                                    href="{% url 'add_to_cart' item.id %}"
+                                    class="add-cart-btn"
+                                >
+                                    Add to Cart
+                                    <span>+</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- =================================
+                 EMPTY STATE
+            ================================== -->
+
+            <div class="menu-empty">
+
+                <div class="empty-icon">
+                    ☕
+                </div>
+
+                <h3>
+                    Coming Soon
+                </h3>
+
+                <p>
+                    We're preparing something delicious
+                    for you.
+                </p>
+
+                <a
+                    href="{% url 'menu' %}"
+                    class="back-menu-btn"
+                >
+                    View All Items
+                </a>
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     MENU CTA
+===================================== -->
+
+<section class="menu-cta">
+
+    <div class="menu-cta-content">
+
+        <span>
+            MADE FRESH FOR YOU
+        </span>
+
+        <h2>
+            Good Food. Good Coffee. Good Times.
+        </h2>
+
+        <p>
+            Reserve your table and enjoy the complete
+            café experience.
+        </p>
+
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

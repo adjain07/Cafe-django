@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+About | Cafe
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="about-hero">
+    <div class="about-hero-grid">
+        <div class="about-hero-copy">
+            <span class="about-kicker">Our Story</span>
+            <h1>Where coffee tells the story of the day.</h1>
+            <p class="lead">
+                We are a neighborhood café built around warmth, craft, and conversation.
+                Every roast, recipe, and table is designed to make slow moments feel special.
+            </p>
+
+            <div class="about-hero-actions">
+                <a class="btn btn-primary" href="{% url 'menu' %}">Explore Our Menu</a>
+                <a class="btn btn-outline" href="{% url 'contact' %}">Visit Us</a>
+            </div>
+
+            <div class="about-proof">
+                <div class="proof-item">
+                    <span class="proof-value">07+</span>
+                    <span class="proof-label">Years of Craft</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">30+</span>
+                    <span class="proof-label">Signature Recipes</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-value">Daily</span>
+                    <span class="proof-label">Fresh Roasts</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-image-panel">
+            <div class="about-image-frame">
+                <div class="about-image-card-inner">
+                    <span class="mini-label">The Café Ritual</span>
+                    <h3>Freshly brewed, thoughtfully served.</h3>
+                    <p>
+                        From golden morning light to evening dessert tables,
+                        our kitchen celebrates honest ingredients and generous hospitality.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-story">
+    <div class="section-shell">
+        <div class="section-heading">
+            <span class="section-kicker">Our Philosophy</span>
+            <h2>Made for people who love meaningful spaces.</h2>
+            <p>
+                Café Project began as a simple idea: build a place where craft,
+                hospitality, and community feel beautifully connected.
+            </p>
+        </div>
+
+        <div class="about-story-grid">
+            <article class="story-card">
+                <div class="story-card-icon">☕</div>
+                <h3>Craft Coffee</h3>
+                <p>
+                    We roast for balance and clarity, choosing cups that feel smooth,
+                    fragrant, and full of character.
+                </p>
+            </article>
+
+            <article class="story-card">
+                <div class="story-card-icon">🍽️</div>
+                <h3>Fresh Kitchen</h3>
+                <p>
+                    Our menu celebrates seasonal ingredients, comforting classics,
+                    and modern café favorites.
+                </p>
+            </article>
+
+            <article class="story-card">
+                <div class="story-card-icon">✦</div>
+                <h3>Warm Gatherings</h3>
+                <p>
+                    Whether you meet friends, work quietly, or pause for a moment,
+                    our space welcomes every kind of rhythm.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="about-values">
+    <div class="section-shell">
+        <div class="section-heading">
+            <span class="section-kicker">What We Believe</span>
+            <h2>The details that make a café memorable.</h2>
+        </div>
+
+        <div class="value-grid">
+            <article class="value-card">
+                <div class="value-card-icon">🌱</div>
+                <h3>Seasonal</h3>
+                <p>Fresh ingredients and thoughtful sourcing shape our menu.</p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-card-icon">🤝</div>
+                <h3>Human</h3>
+                <p>Every guest is treated with kindness and sincere care.</p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-card-icon">🔥</div>
+                <h3>Crafted</h3>
+                <p>From roast profile to plating, each detail matters.</p>
+            </article>
+
+            <article class="value-card">
+                <div class="value-card-icon">☀️</div>
+                <h3>Bright</h3>
+                <p>Our atmosphere is calm, friendly, and inviting.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="about-process">
+    <div class="section-heading">
+        <span class="section-kicker">Our Process</span>
+        <h2>From ingredient to experience.</h2>
+    </div>
+
+    <div class="process-timeline">
+        <article class="process-step">
+            <div class="step-number">01</div>
+            <h3>Source</h3>
+            <p>
+                We choose ingredients that are fresh, reliable, and rooted in quality.
+            </p>
+        </article>
+
+        <article class="process-step">
+            <div class="step-number">02</div>
+            <h3>Prepare</h3>
+            <p>
+                Our kitchen and bar turn everyday ingredients into balanced, beautiful dishes.
+            </p>
+        </article>
+
+        <article class="process-step">
+            <div class="step-number">03</div>
+            <h3>Serve</h3>
+            <p>
+                We welcome every guest with warmth, clarity, and a sense of comfort.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="about-cta">
+    <div class="cta-wrapper">
+        <div>
+            <span class="section-kicker" style="color:#f0b672;">Come by</span>
+            <h2>Make time for a better cup.</h2>
+            <p>
+                Join us for coffee, conversation, fresh food, and a genuine sense of welcome.
+            </p>
+        </div>
+        <div class="cta-buttons">
+            <a class="btn btn-primary" href="{% url 'menu' %}">Order Today</a>
+            <a class="btn btn-outline" href="{% url 'contact' %}">Plan a Visit</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
