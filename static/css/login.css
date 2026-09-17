@@ -1,0 +1,42 @@
+/* .password-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.password-row label {
+    margin-bottom: 0;
+}
+
+.forgot-password {
+    color: #a86432;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.reset-error {
+    text-align: center;
+}
+
+.reset-error h3 {
+    color: #8b3a2f;
+    margin-bottom: 10px;
+}
+
+.reset-error p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.form-error {
+    color: #b42318;
+    font-size: 13px;
+    margin-top: 5px;
+} */

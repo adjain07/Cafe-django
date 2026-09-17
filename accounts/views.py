@@ -20,25 +20,50 @@ def login_view(request):
 
     return render(request,'accounts/login.html')
 
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+
+
 def register(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        password2 = request.POST.get('password2')
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        password = request.POST.get("password")
+        password2 = request.POST.get("password2")
+
         if password != password2:
-            messages.error(request,'Passwords do not match.')
-            return redirect('register')
+            messages.error(request, "Passwords do not match.")
+            return render(request, "accounts/register.html")
+
         if User.objects.filter(username=username).exists():
-            messages.error(request,'Username already exists.')
-            return redirect('register')
-        user = User.objects.create_user(username=username,email=email,password=password)
+            messages.error(request, "Username already exists.")
+            return render(request, "accounts/register.html")
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+            return render(request, "accounts/register.html")
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name
+        )
+
         login(request, user)
-        messages.success(request,'Registration successful.')
-        
-        return redirect('home')
-    
-    return render(request,'accounts/register.html')
+
+        messages.success(request, "Account created successfully!")
+
+        return redirect("home")
+
+    return render(request, "accounts/register.html")
 
 
 def logout_view(request):

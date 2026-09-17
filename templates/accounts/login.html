@@ -1,54 +1,196 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block title %}
-Login | Cafe
+{% block title %}Login | Panchayat Cafe{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<section class="auth-section">
 
-    <h1>
-        Login
-    </h1>
+    <div class="auth-container">
 
-    <form method="POST">
+        <!-- Left Side -->
+        <div class="auth-intro">
 
-        {% csrf_token %}
+            <div class="auth-brand">
+                <span class="auth-brand-name">Panchayat</span>
+                <span class="auth-brand-subtitle">CAFE</span>
+            </div>
 
-        <div>
-            <label>
-                Username
-            </label>
+            <div class="auth-intro-content">
+                <span class="auth-small-title">WELCOME BACK</span>
 
-            <input
-                type="text"
-                name="username"
-                required
-            >
+                <h1>
+                    Good food,
+                    <span>good moments.</span>
+                </h1>
+
+                <p>
+                    Login to Panchayat Cafe and continue your
+                    delicious journey with us.
+                </p>
+            </div>
+
+            <div class="auth-decoration decoration-one"></div>
+            <div class="auth-decoration decoration-two"></div>
+
         </div>
 
-        <div>
-            <label>
-                Password
-            </label>
 
-            <input
-                type="password"
-                name="password"
-                required
-            >
+        <!-- Right Side -->
+        <div class="auth-form-wrapper">
+
+            <div class="auth-card">
+
+                <div class="auth-header">
+                    <div class="auth-icon">☕</div>
+
+                    <h2>Welcome Back</h2>
+
+                    <p>
+                        Login to your account to continue
+                    </p>
+                </div>
+
+
+                {% if messages %}
+                    <div class="auth-messages">
+                        {% for message in messages %}
+                            <div class="auth-message">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+
+                <form method="post" class="auth-form">
+
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                        <div class="form-alert">
+                            Please check your username and password.
+                        </div>
+                    {% endif %}
+
+
+                    <div class="form-group">
+
+                        <label for="id_username">
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+
+                            <input
+                                type="text"
+                                name="username"
+                                id="id_username"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div class="password-row">
+
+                            <label for="id_password">
+                                Password
+                            </label>
+
+                            <a href="{% url 'password_reset' %}">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">🔒</span>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="id_password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('id_password', this)"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" class="auth-btn">
+                        <span>Login</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+
+                </form>
+
+
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+
+
+                <div class="auth-register">
+
+                    <p>
+                        Don't have an account?
+                    </p>
+
+                    <a href="{% url 'register' %}">
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <button
-            type="submit"
-            class="btn"
-        >
-            Login
-        </button>
+    </div>
 
-    </form>
+</section>
 
-</div>
+{% endblock %}
 
+
+{% block extra_js %}
+<script>
+function togglePassword(inputId, button) {
+
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        button.textContent = "🙈";
+    } else {
+        input.type = "password";
+        button.textContent = "👁";
+    }
+}
+</script>
 {% endblock %}

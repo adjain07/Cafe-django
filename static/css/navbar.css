@@ -1,190 +1,750 @@
+/* =========================================================
+   PANCHAYAT CAFE
+   RESPONSIVE PROFESSIONAL NAVBAR
+========================================================= */
+
+:root {
+    --nav-bg: #2d1b12;
+    --nav-bg-mobile: #24160f;
+
+    --nav-text: #f9eee3;
+    --nav-text-hover: #ffd9aa;
+
+    --nav-accent: #f0b672;
+    --nav-accent-light: #ffd9aa;
+
+    --nav-border: rgba(240, 182, 114, 0.18);
+
+    --nav-shadow:
+        0 8px 30px rgba(27, 16, 9, 0.18);
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 .navbar {
-    background: #2d1b12;
-    padding: 16px 0;
-    box-shadow: 0 8px 30px rgba(27, 16, 9, 0.18);
     position: sticky;
     top: 0;
     z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(45, 27, 18, 0.98);
+
+    border-bottom: 1px solid var(--nav-border);
+
+    box-shadow: var(--nav-shadow);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
 .navbar-container {
+    width: min(92%, 1200px);
+
+    min-height: 72px;
+
+    margin: 0 auto;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
-    gap: 20px;
+
+    gap: 25px;
 }
+
+
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo {
     display: flex;
+
     align-items: center;
-    gap: 10px;
-    color: #fffaf5;
+
+    flex-shrink: 0;
+
+    max-width: 180px;
+
     text-decoration: none;
-    font-family: Georgia, "Times New Roman", serif;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
 
-.logo-mark {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #f9d1a5;
-    color: #3c2719;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 700;
-    border: 1px solid rgba(255, 250, 245, 0.8);
+.logo:hover {
+    opacity: 0.94;
+
+    transform: translateY(-1px);
 }
 
-.logo-text {
-    font-size: 25px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+
+/* =========================================================
+   LOGO IMAGE
+========================================================= */
+
+.logo-image {
+    display: block;
+
+    width: 145px;
+    height: 65px;
+
+    object-fit: contain;
+    object-position: center;
+
+    transition:
+        transform 0.3s ease;
 }
+
+.logo:hover .logo-image {
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 .nav-links {
     display: flex;
+
     align-items: center;
-    gap: 10px;
+
+    justify-content: flex-end;
+
+    gap: 6px;
+
     flex-wrap: wrap;
 }
 
+
+/* =========================================================
+   NAV LINK
+========================================================= */
+
 .nav-link {
-    color: #f9eee3;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 11px 14px;
-    border-radius: 999px;
-    transition: color 280ms ease, background 280ms ease, transform 280ms ease;
     position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 13px;
+
+    border-radius: 999px;
+
+    color: var(--nav-text);
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
+
+
+/* =========================================================
+   ACTIVE UNDERLINE
+========================================================= */
 
 .nav-link::after {
     content: "";
-    display: block;
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 5px;
+
     width: 0;
     height: 2px;
-    background: #f0b672;
-    transition: width 300ms ease;
-    margin-top: 5px;
+
+    border-radius: 20px;
+
+    background: var(--nav-accent);
+
+    transform: translateX(-50%);
+
+    transition:
+        width 0.3s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-    color: #fffaf5;
-    background: rgba(240, 182, 114, 0.12);
-}
+
+/* =========================================================
+   HOVER
+========================================================= */
 
 .nav-link:hover {
-    color: #ffd9aa;
-    background: rgba(240, 182, 114, 0.20);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(240, 182, 114, 0.12);
+    color: var(--nav-text-hover);
+
+    background:
+        rgba(240, 182, 114, 0.16);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(240, 182, 114, 0.08);
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.nav-link.active {
+    color: #fffaf5;
+
+    background:
+        rgba(240, 182, 114, 0.12);
 }
+
+.nav-link.active::after {
+    width: 22px;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
 
 .nav-button {
-    border: 1px solid #f0b672;
-    background: #f0b672;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    border: 1px solid var(--nav-accent);
+
+    background: var(--nav-accent);
+
     color: #3c2719;
+
+    box-shadow:
+        0 4px 12px rgba(240, 182, 114, 0.12);
+}
+
+.nav-button::after {
+    display: none;
 }
 
 .nav-button:hover {
-    background: #ffd9aa;
+    border-color: var(--nav-accent-light);
+
+    background: var(--nav-accent-light);
+
     color: #3c2719;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(240, 182, 114, 0.20);
 }
 
-.cart-link {
-    border: none;
-}
+
+/* =========================================================
+   MOBILE TOGGLE
+========================================================= */
 
 .nav-toggle {
     display: none;
-    width: 46px;
-    height: 46px;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 0;
+
+    border: 1px solid
+        rgba(255, 250, 245, 0.75);
+
     border-radius: 50%;
-    border: 1px solid rgba(255, 250, 245, 0.8);
+
     background: transparent;
+
     align-items: center;
     justify-content: center;
+
     flex-direction: column;
+
     gap: 5px;
+
     cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
 }
+
+.nav-toggle:hover {
+    background:
+        rgba(240, 182, 114, 0.12);
+
+    border-color:
+        var(--nav-accent);
+
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   HAMBURGER
+========================================================= */
 
 .nav-toggle span {
-    width: 20px;
+    display: block;
+
+    width: 19px;
     height: 2px;
+
+    border-radius: 10px;
+
     background: #fffaf5;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
 }
 
+
+/* =========================================================
+   HAMBURGER → X
+========================================================= */
+
+.navbar.open .nav-toggle span:nth-child(1) {
+    transform:
+        translateY(7px)
+        rotate(45deg);
+}
+
+.navbar.open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar.open .nav-toggle span:nth-child(3) {
+    transform:
+        translateY(-7px)
+        rotate(-45deg);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .navbar-container {
+        width: 94%;
+
+        gap: 15px;
+    }
+
+    .logo-image {
+        width: 125px;
+        height: 60px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-link {
+        min-height: 40px;
+
+        padding:
+            0 9px;
+
+        font-size: 10px;
+
+        letter-spacing:
+            0.08em;
+    }
+
+    .nav-button {
+        padding:
+            0 14px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .navbar-container {
+        min-height: 65px;
+    }
+
+    .logo-image {
+        width: 115px;
+        height: 56px;
+    }
+
+    .nav-links {
+        gap: 1px;
+    }
+
+    .nav-link {
+        padding:
+            0 7px;
+
+        font-size: 9px;
+
+        letter-spacing:
+            0.06em;
+    }
+
+    .nav-button {
+        padding:
+            0 11px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 900px) {
+
     .navbar {
-        padding: 12px 0;
+        padding: 7px 0;
     }
 
     .navbar-container {
         position: relative;
+
+        width: 92%;
+
+        min-height: 58px;
     }
+
+
+    /* LOGO */
+
+    .logo-image {
+        width: 120px;
+        height: 58px;
+    }
+
+
+    /* HAMBURGER */
 
     .nav-toggle {
         display: flex;
     }
 
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
     .nav-links {
+
         position: absolute;
-        top: calc(100% + 12px);
+
+        top: calc(100% + 10px);
+
         left: 0;
         right: 0;
-        background: #2d1b12;
+
         display: none;
+
         flex-direction: column;
-        align-items: center;
-        padding: 16px 12px;
-        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.22);
-        border-radius: 12px;
-        border: 1px solid rgba(240, 182, 114, 0.4);
+
+        align-items: stretch;
+
+        gap: 5px;
+
+        padding: 14px;
+
+        background:
+            rgba(36, 22, 15, 0.99);
+
+        border:
+            1px solid
+            rgba(240, 182, 114, 0.30);
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 18px 38px
+            rgba(0, 0, 0, 0.28);
+
+        backdrop-filter:
+            blur(12px);
+
+        -webkit-backdrop-filter:
+            blur(12px);
+
+        max-height:
+            calc(100vh - 90px);
+
+        overflow-y: auto;
+
+        overscroll-behavior:
+            contain;
     }
+
+
+    /* OPEN MENU */
 
     .navbar.open .nav-links {
+
         display: flex;
+
+        animation:
+            mobileNavOpen
+            0.25s ease both;
     }
 
+
+    /* MOBILE LINK */
+
     .nav-link {
+
         width: 100%;
-        text-align: center;
-        border-radius: 8px;
-        padding: 12px 14px;
+
+        min-height: 46px;
+
+        box-sizing: border-box;
+
+        padding:
+            0 16px;
+
+        border-radius: 9px;
+
+        font-size: 11px;
+
+        letter-spacing:
+            0.10em;
     }
+
 
     .nav-link::after {
         display: none;
     }
 
+
+    .nav-link:hover {
+
+        transform:
+            translateX(3px);
+
+        box-shadow: none;
+    }
+
+
+    /* MOBILE BUTTON */
+
     .nav-button {
+
         width: 100%;
+
+        box-sizing: border-box;
+
+        margin-top: 3px;
     }
 }
 
-@media (max-width: 520px) {
-    .logo-text {
-        font-size: 20px;
+
+/* =========================================================
+   MOBILE — 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar-container {
+        width: 92%;
     }
 
-    .logo-mark {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
+    .logo-image {
+        width: 112px;
+        height: 55px;
+    }
+
+    .nav-toggle {
+        width: 42px;
+        height: 42px;
+    }
+
+    .nav-toggle span {
+        width: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 480px
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .navbar-container {
+        width: 94%;
+    }
+
+    .logo-image {
+        width: 105px;
+        height: 52px;
+    }
+
+    .nav-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .nav-toggle span {
+        width: 17px;
+    }
+
+    .nav-links {
+        top:
+            calc(100% + 8px);
+
+        padding:
+            11px;
     }
 
     .nav-link {
-        font-size: 11px;
+        min-height: 44px;
+
+        font-size: 10px;
+
+        letter-spacing:
+            0.08em;
     }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE — 360px
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .navbar-container {
+        width: 95%;
+    }
+
+    .logo-image {
+        width: 95px;
+        height: 49px;
+    }
+
+    .nav-toggle {
+        width: 38px;
+        height: 38px;
+    }
+
+    .nav-toggle span {
+        width: 16px;
+    }
+
+    .nav-link {
+        min-height: 42px;
+
+        font-size: 9px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE MENU ANIMATION
+========================================================= */
+
+@keyframes mobileNavOpen {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-8px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+========================================================= */
+
+.logo:focus-visible,
+.nav-link:focus-visible,
+.nav-toggle:focus-visible {
+
+    outline:
+        2px solid
+        var(--nav-accent);
+
+    outline-offset:
+        4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .navbar,
+    .logo,
+    .logo-image,
+    .nav-link,
+    .nav-link::after,
+    .nav-button,
+    .nav-toggle,
+    .nav-toggle span {
+
+        transition: none;
+    }
+
+    .navbar.open .nav-links {
+        animation: none;
+    }
+
 }

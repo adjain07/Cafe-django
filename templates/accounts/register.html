@@ -1,78 +1,313 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block title %}
-Register | Cafe
+{% block title %}Create Account | Panchayat Cafe{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<section class="auth-section">
 
-    <h1>
-        Create Account
-    </h1>
+    <div class="auth-container">
 
-    <form method="POST">
+        <!-- Left Side -->
+        <div class="auth-intro register-intro">
 
-        {% csrf_token %}
+            <div class="auth-brand">
+                <span class="auth-brand-name">Panchayat</span>
+                <span class="auth-brand-subtitle">CAFE</span>
+            </div>
 
-        <div>
-            <label>
-                Username
-            </label>
+            <div class="auth-intro-content">
 
-            <input
-                type="text"
-                name="username"
-                required
-            >
+                <span class="auth-small-title">
+                    JOIN OUR FAMILY
+                </span>
+
+                <h1>
+                    Create your
+                    <span>cafe story.</span>
+                </h1>
+
+                <p>
+                    Create your Panchayat Cafe account and
+                    enjoy a better ordering experience.
+                </p>
+
+            </div>
+
+            <div class="auth-decoration decoration-one"></div>
+            <div class="auth-decoration decoration-two"></div>
+
         </div>
 
-        <div>
-            <label>
-                Email
-            </label>
 
-            <input
-                type="email"
-                name="email"
-                required
-            >
+        <!-- Right Side -->
+        <div class="auth-form-wrapper">
+
+            <div class="auth-card register-card">
+
+                <div class="auth-header">
+
+                    <div class="auth-icon">☕</div>
+
+                    <h2>Create Account</h2>
+
+                    <p>
+                        Join Panchayat Cafe today
+                    </p>
+
+                </div>
+
+
+                {% if messages %}
+                    <div class="auth-messages">
+                        {% for message in messages %}
+                            <div class="auth-message">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+
+                <form method="post" class="auth-form">
+
+                    {% csrf_token %}
+
+
+                    {% if form.errors %}
+                        <div class="form-alert">
+                            Please correct the errors below.
+                        </div>
+                    {% endif %}
+
+
+                    <!-- Username -->
+                    <div class="form-group">
+
+                        <label for="id_username">
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">👤</span>
+
+                            <input
+                                type="text"
+                                name="username"
+                                id="id_username"
+                                placeholder="Choose a username"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                                        <!-- Email -->
+                    <div class="form-group">
+
+                        <label for="id_email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">✉</span>
+
+                            <input
+                                type="email"
+                                name="email"
+                                id="id_email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- First Name -->
+                    <div class="form-group">
+
+                        <label for="id_first_name">
+                            First Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">👤</span>
+
+                            <input
+                                type="text"
+                                name="first_name"
+                                id="id_first_name"
+                                placeholder="Enter your first name"
+                                autocomplete="given-name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Last Name -->
+                    <div class="form-group">
+
+                        <label for="id_last_name">
+                            Last Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">👤</span>
+
+                            <input
+                                type="text"
+                                name="last_name"
+                                id="id_last_name"
+                                placeholder="Enter your last name"
+                                autocomplete="family-name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="form-group">
+
+                        <label for="id_password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">🔒</span>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="id_password"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('id_password', this)"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+
+                        <label for="id_password2">
+                            Confirm Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">🔐</span>
+
+                            <input
+                                type="password"
+                                name="password2"
+                                id="id_password2"
+                                placeholder="Confirm your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('id_password2', this)"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" class="auth-btn">
+
+                        <span>Create Account</span>
+
+                        <span class="btn-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+
+
+                <div class="auth-register">
+
+                    <p>
+                        Already have an account?
+                    </p>
+
+                    <a href="{% url 'login' %}">
+                        Login Now
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div>
-            <label>
-                Password
-            </label>
+    </div>
 
-            <input
-                type="password"
-                name="password"
-                required
-            >
-        </div>
+</section>
 
-        <div>
-            <label>
-                Confirm Password
-            </label>
+{% endblock %}
 
-            <input
-                type="password"
-                name="password2"
-                required
-            >
-        </div>
 
-        <button
-            type="submit"
-            class="btn"
-        >
-            Register
-        </button>
+{% block extra_js %}
+<script>
+function togglePassword(inputId, button) {
 
-    </form>
+    const input = document.getElementById(inputId);
 
-</div>
-
+    if (input.type === "password") {
+        input.type = "text";
+        button.textContent = "🙈";
+    } else {
+        input.type = "password";
+        button.textContent = "👁";
+    }
+}
+</script>
 {% endblock %}
