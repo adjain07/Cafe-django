@@ -11,6 +11,18 @@ urlpatterns = [
     ),
 
     path(
+        'cart/update/',
+        views.update_cart,
+        name='update_cart'
+    ),
+
+    path(
+        'cart/remove/<int:item_id>/',
+        views.remove_from_cart,
+        name='remove_from_cart'
+    ),
+
+    path(
         'checkout/',
         views.checkout,
         name='checkout'
@@ -29,7 +41,7 @@ urlpatterns = [
     ),
 
     path(
-        '<int:order_id>/',
+        'my-orders/<int:order_id>/',
         views.order_detail,
         name='order_detail'
     ),

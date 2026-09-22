@@ -20,138 +20,252 @@
         </div>
     </div>
 
-    <div class="container cart-container">
+
+    <div class="cart-container">
 
         {% if cart_items %}
 
         <div class="cart-layout">
 
-            <!-- LEFT : CART ITEMS -->
+            <!-- =========================================
+                 LEFT : CART ITEMS
+            ========================================== -->
+
             <div class="cart-items-section">
 
                 <div class="cart-section-heading">
+
                     <div>
                         <h2>Your Items</h2>
-                        <span>{{ cart_items|length }} item{{ cart_items|length|pluralize }}</span>
+
+                        <span>
+                            {{ cart_items|length }}
+                            item{{ cart_items|length|pluralize }}
+                        </span>
                     </div>
 
-                    <a href="{% url 'menu' %}" class="continue-shopping">
+                    <a
+                        href="{% url 'menu' %}"
+                        class="continue-shopping"
+                    >
                         ← Continue Shopping
                     </a>
+
                 </div>
 
-                <div class="cart-items">
 
-                    {% for item in cart_items %}
+                <!-- IMPORTANT:
+                     One form for ALL cart items
+                -->
 
-                    <div class="cart-item">
+                <form
+                    method="post"
+                    action="{% url 'update_cart' %}"
+                    id="cart-update-form"
+                >
 
-                        <!-- Product Image -->
-                        <div class="cart-item-image">
+                    {% csrf_token %}
 
-                            {% if item.menu_item.image %}
-                                <img src="{{ item.menu_item.image.url }}"
-                                     alt="{{ item.menu_item.name }}">
-                            {% else %}
-                                <div class="image-placeholder">
-                                    ☕
-                                </div>
-                            {% endif %}
+                    <div class="cart-items">
 
-                        </div>
+                        {% for cart_item in cart_items %}
 
-                        <!-- Product Information -->
-                        <div class="cart-item-info">
+                        <div class="cart-item">
 
-                            <span class="item-category">
-                                {{ item.menu_item.category.name }}
-                            </span>
+                            <!-- Product Image -->
+                            <div class="cart-item-image">
 
-                            <h3>
-                                {{ item.menu_item.name }}
-                            </h3>
+                                {% if cart_item.item.image %}
 
-                            <p class="item-description">
-                                {{ item.menu_item.description|truncatechars:90 }}
-                            </p>
+                                    <img
+                                        src="{{ cart_item.item.image.url }}"
+                                        alt="{{ cart_item.item.name }}"
+                                    >
 
-                            <span class="item-price">
-                                ₹{{ item.price }}
-                            </span>
+                                {% else %}
 
-                        </div>
+                                    <div class="image-placeholder">
+                                        ☕
+                                    </div>
 
-                        <!-- Quantity -->
-                        <div class="cart-quantity">
+                                {% endif %}
 
-                            <span class="quantity-label">Quantity</span>
+                            </div>
 
-                            <div class="quantity-box">
-                                <button type="button"
-                                        class="quantity-btn"
-                                        disabled>
+
+                            <!-- Product Information -->
+                            <div class="cart-item-info">
+
+                                <span class="item-category">
+                                    {{ cart_item.item.category.name }}
+                                </span>
+
+                                <h3>
+                                    {{ cart_item.item.name }}
+                                </h3>
+
+                                <p class="item-description">
+                                    {{ cart_item.item.description|truncatechars:90 }}
+                                </p>
+
+                                <span class="item-price">
+                                    ₹{{ cart_item.item.price }}
+                                </span>
+
+                            </div>
+
+
+                            <!-- Quantity -->
+                            <div class="cart-quantity">
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                    onclick="changeQuantity(
+                                        '{{ cart_item.item.id }}',
+                                        -1
+                                    )"
+                                    aria-label="Decrease quantity"
+                                >
                                     −
                                 </button>
 
-                                <span>{{ item.quantity }}</span>
 
-                                <button type="button"
-                                        class="quantity-btn"
-                                        disabled>
+                                <input
+                                    type="number"
+                                    name="quantity_{{ cart_item.item.id }}"
+                                    id="quantity_{{ cart_item.item.id }}"
+                                    value="{{ cart_item.quantity }}"
+                                    min="1"
+                                    max="20"
+                                    class="quantity-input"
+                                >
+
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                    onclick="changeQuantity(
+                                        '{{ cart_item.item.id }}',
+                                        1
+                                    )"
+                                    aria-label="Increase quantity"
+                                >
                                     +
                                 </button>
+
+                            </div>
+
+
+                            <!-- Subtotal -->
+                            <div class="cart-item-total">
+
+                                <span class="total-label">
+                                    Subtotal
+                                </span>
+
+                                <strong>
+                                    ₹{{ cart_item.subtotal }}
+                                </strong>
+
+                            </div>
+
+
+                            <!-- Remove -->
+                            <div class="cart-item-remove">
+
+                                <a
+                                    href="{% url 'remove_from_cart' cart_item.item.id %}"
+                                    class="remove-item-btn"
+                                    onclick="return confirm(
+                                        'Remove this item from your cart?'
+                                    );"
+                                >
+                                    Remove
+                                </a>
+
                             </div>
 
                         </div>
 
-                        <!-- Subtotal -->
-                        <div class="cart-item-total">
-
-                            <span class="total-label">Subtotal</span>
-
-                            <strong>
-                                ₹{{ item.subtotal }}
-                            </strong>
-
-                        </div>
+                        {% endfor %}
 
                     </div>
 
-                    {% endfor %}
 
-                </div>
+                    <!-- Update Cart Button -->
+                    <div class="cart-update-area">
+
+                        <button
+                            type="submit"
+                            class="update-cart-btn"
+                        >
+                            <span>Update Cart</span>
+                            <span>↻</span>
+                        </button>
+
+                    </div>
+
+                </form>
+
 
                 <!-- Bottom Note -->
                 <div class="cart-note">
+
                     <span class="note-icon">✓</span>
 
                     <div>
-                        <strong>Freshly prepared for you</strong>
+
+                        <strong>
+                            Freshly prepared for you
+                        </strong>
+
                         <p>
                             Your order will be prepared fresh once confirmed.
                         </p>
+
                     </div>
+
                 </div>
 
             </div>
 
 
-            <!-- RIGHT : ORDER SUMMARY -->
+            <!-- =========================================
+                 RIGHT : ORDER SUMMARY
+            ========================================== -->
+
             <aside class="order-summary">
 
                 <div class="summary-header">
-                    <span>ORDER SUMMARY</span>
-                    <h2>Your Order</h2>
+
+                    <span>
+                        ORDER SUMMARY
+                    </span>
+
+                    <h2>
+                        Your Order
+                    </h2>
+
                 </div>
+
 
                 <div class="summary-items">
 
                     {% for cart_item in cart_items %}
+
                     <div class="summary-item">
 
                         <div>
-                            <span>{{ cart_item.item.name }}</span>
-                            <small>× {{ cart_item.quantity }}</small>
+
+                            <span>
+                                {{ cart_item.item.name }}
+                            </span>
+
+                            <small>
+                                × {{ cart_item.quantity }}
+                            </small>
+
                         </div>
 
                         <strong>
@@ -164,42 +278,90 @@
 
                 </div>
 
-                <div class="summary-divider"></div>
-
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span>₹{{ total }}</span>
-                </div>
-
-                <div class="summary-row">
-                    <span>Delivery</span>
-                    <span class="free">FREE</span>
-                </div>
 
                 <div class="summary-divider"></div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ₹{{ total }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <span class="free">
+                        FREE
+                    </span>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
 
                 <div class="summary-total">
-                    <span>Total</span>
-                    <strong>₹{{ total }}</strong>
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ₹{{ total }}
+                    </strong>
+
                 </div>
 
-                <a href="{% url 'checkout' %}" class="checkout-btn">
-                    <span>Proceed to Checkout</span>
-                    <span>→</span>
+
+                <a
+                    href="{% url 'checkout' %}"
+                    class="checkout-btn"
+                >
+
+                    <span>
+                        Proceed to Checkout
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
                 </a>
 
+
                 <div class="secure-checkout">
-                    <span>🔒</span>
-                    <p>Secure checkout · Freshly prepared</p>
+
+                    <span>
+                        🔒
+                    </span>
+
+                    <p>
+                        Secure checkout · Freshly prepared
+                    </p>
+
                 </div>
 
             </aside>
 
         </div>
 
+
         {% else %}
 
-        <!-- EMPTY CART -->
+        <!-- =========================================
+             EMPTY CART
+        ========================================== -->
 
         <div class="empty-cart">
 
@@ -207,18 +369,30 @@
                 🛒
             </div>
 
-            <span class="cart-eyebrow">YOUR CART</span>
+            <span class="cart-eyebrow">
+                YOUR CART
+            </span>
 
-            <h2>Your Cart is Empty</h2>
+            <h2>
+                Your Cart is Empty
+            </h2>
 
             <p>
                 Looks like you haven't added anything yet.
                 Explore our menu and discover something delicious.
             </p>
 
-            <a href="{% url 'menu' %}" class="browse-menu-btn">
+            <a
+                href="{% url 'menu' %}"
+                class="browse-menu-btn"
+            >
+
                 Explore Our Menu
-                <span>→</span>
+
+                <span>
+                    →
+                </span>
+
             </a>
 
         </div>
@@ -228,5 +402,45 @@
     </div>
 
 </section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+function changeQuantity(itemId, change) {
+
+    const input = document.getElementById(
+        "quantity_" + itemId
+    );
+
+    if (!input) {
+        return;
+    }
+
+    let quantity = parseInt(input.value);
+
+    if (isNaN(quantity)) {
+        quantity = 1;
+    }
+
+    quantity += change;
+
+    // Minimum quantity = 1
+    if (quantity < 1) {
+        quantity = 1;
+    }
+
+    // Maximum quantity = 20
+    if (quantity > 20) {
+        quantity = 20;
+    }
+
+    input.value = quantity;
+}
+
+</script>
 
 {% endblock %}

@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -15,24 +16,30 @@
         {% block title %}Cafe{% endblock %}
     </title>
 
+    <!-- Main Website CSS -->
     <link
         rel="stylesheet"
         href="{% static 'css/style.css' %}"
     >
 
+    <!-- Navbar CSS -->
     <link
         rel="stylesheet"
         href="{% static 'css/navbar.css' %}"
     >
 
+    <!-- Global Responsive CSS -->
     <link
-    rel="stylesheet"
-    href="{% static 'css/responsive.css' %}"
+        rel="stylesheet"
+        href="{% static 'css/responsive.css' %}"
     >
+
+    <!-- Page Specific CSS -->
     {% block extra_css %}
     {% endblock %}
 
 </head>
+
 
 <body>
 
@@ -47,10 +54,12 @@
 
     {% include 'includes/footer.html' %}
 
+
     <script src="{% static 'js/main.js' %}"></script>
 
     {% block extra_js %}
     {% endblock %}
 
 </body>
+
 </html>
