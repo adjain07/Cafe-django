@@ -90,6 +90,52 @@
     align-items: center;
     gap: 14px;
     flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* HERO BUTTONS */
+.about-hero-actions a,
+.about-hero-actions button {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 24px;
+    border: 1px solid #9b6637;
+    border-radius: 999px;
+    background: #9b6637;
+    color: #fffaf5;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.about-hero-actions a:hover,
+.about-hero-actions button:hover {
+    background: #c9955d;
+    border-color: #c9955d;
+    color: #2d1b12;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.20);
+}
+
+.about-hero-actions a:focus-visible,
+.about-hero-actions button:focus-visible {
+    outline: 2px solid #f0b672;
+    outline-offset: 3px;
 }
 
 .about-proof {
@@ -388,6 +434,51 @@
     flex-wrap: wrap;
 }
 
+/* CTA BUTTONS */
+.about-cta .cta-buttons a,
+.about-cta .cta-buttons button {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 24px;
+    border: 1px solid #c9955d;
+    border-radius: 999px;
+    background: #c9955d;
+    color: #2d1b12;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.about-cta .cta-buttons a:hover,
+.about-cta .cta-buttons button:hover {
+    background: #fffaf5;
+    border-color: #fffaf5;
+    color: #2d1b12;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.about-cta .cta-buttons a:focus-visible,
+.about-cta .cta-buttons button:focus-visible {
+    outline: 2px solid #f0b672;
+    outline-offset: 3px;
+}
+
 @keyframes floatCard {
     50% {
         transform: translateY(-8px);
@@ -423,5 +514,40 @@
     .about-cta .cta-wrapper {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .about-hero-actions,
+    .about-cta .cta-buttons {
+        width: 100%;
+    }
+
+    .about-hero-actions a,
+    .about-hero-actions button,
+    .about-cta .cta-buttons a,
+    .about-cta .cta-buttons button {
+        min-height: 46px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .about-hero-grid,
+    .about-story .section-shell,
+    .about-cta .cta-wrapper {
+        width: calc(100% - 32px);
+    }
+
+    .about-hero-actions,
+    .about-cta .cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .about-hero-actions a,
+    .about-hero-actions button,
+    .about-cta .cta-buttons a,
+    .about-cta .cta-buttons button {
+        width: 100%;
+        min-height: 48px;
     }
 }

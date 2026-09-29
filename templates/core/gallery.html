@@ -25,7 +25,28 @@ Gallery | Cafe
     <div class="gallery-container">
 
 
-        <!-- CATEGORY FILTER -->
+        <!-- =================================
+             PAGE HEADING
+        ================================= -->
+
+        <div class="gallery-heading">
+
+            <span>OUR MOMENTS</span>
+
+            <h1>
+                Cafe Gallery
+            </h1>
+
+            <p>
+                A glimpse into our coffee, food and cafe experience.
+            </p>
+
+        </div>
+
+
+        <!-- =================================
+             CATEGORY FILTER
+        ================================= -->
 
         <div class="gallery-filters">
 
@@ -56,7 +77,9 @@ Gallery | Cafe
 
 
 
-        <!-- GALLERY -->
+        <!-- =================================
+             GALLERY
+        ================================= -->
 
         {% if images %}
 
@@ -64,27 +87,46 @@ Gallery | Cafe
 
                 {% for image in images %}
 
-                    <div class="gallery-card">
+                    <div
+                        class="gallery-card"
+                        data-gallery-index="{{ forloop.counter0 }}"
+                        tabindex="0"
+                        role="button"
+                        aria-label="View {{ image.title }}"
+                    >
 
                         <img
                             src="{{ image.image.url }}"
                             alt="{{ image.title }}"
+                            loading="lazy"
                         >
 
 
+                        <!-- IMAGE OVERLAY -->
+
                         <div class="gallery-overlay">
 
-                            <h3>
-                                {{ image.title }}
-                            </h3>
+                            <div>
 
-                            {% if image.description %}
+                                <h3>
+                                    {{ image.title }}
+                                </h3>
 
-                                <p>
-                                    {{ image.description }}
-                                </p>
 
-                            {% endif %}
+                                {% if image.description %}
+
+                                    <p>
+                                        {{ image.description }}
+                                    </p>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <span class="gallery-view-icon">
+                                ⛶
+                            </span>
 
                         </div>
 
@@ -98,9 +140,15 @@ Gallery | Cafe
         {% else %}
 
 
-            <!-- EMPTY GALLERY -->
+            <!-- =================================
+                 EMPTY GALLERY
+            ================================= -->
 
             <div class="gallery-coming-soon">
+
+                <div class="gallery-empty-icon">
+                    ✦
+                </div>
 
                 <h1>
                     Gallery Coming Soon
@@ -120,5 +168,415 @@ Gallery | Cafe
     </div>
 
 </section>
+
+
+
+<!-- =================================
+     LIGHTBOX
+================================= -->
+
+<div
+    class="gallery-lightbox"
+    id="galleryLightbox"
+    aria-hidden="true"
+>
+
+    <button
+        type="button"
+        class="lightbox-close"
+        id="lightboxClose"
+        aria-label="Close image"
+    >
+        &times;
+    </button>
+
+
+    <button
+        type="button"
+        class="lightbox-prev"
+        id="lightboxPrev"
+        aria-label="Previous image"
+    >
+        &#10094;
+    </button>
+
+
+    <div class="lightbox-content">
+
+        <img
+            src=""
+            alt=""
+            id="lightboxImage"
+        >
+
+
+        <div class="lightbox-caption">
+
+            <h3 id="lightboxTitle"></h3>
+
+            <p id="lightboxDescription"></p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="lightbox-next"
+        id="lightboxNext"
+        aria-label="Next image"
+    >
+        &#10095;
+    </button>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const galleryCards = document.querySelectorAll(".gallery-card");
+
+    const lightbox = document.getElementById("galleryLightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxTitle = document.getElementById("lightboxTitle");
+    const lightboxDescription = document.getElementById("lightboxDescription");
+
+    const closeButton = document.getElementById("lightboxClose");
+    const prevButton = document.getElementById("lightboxPrev");
+    const nextButton = document.getElementById("lightboxNext");
+
+
+    if (!galleryCards.length || !lightbox) {
+        return;
+    }
+
+
+    let currentIndex = 0;
+
+
+    /*
+    -----------------------------------------
+    GET IMAGE DATA
+    -----------------------------------------
+    */
+
+    const galleryItems = Array.from(galleryCards).map(function (card) {
+
+        const image = card.querySelector("img");
+
+        const titleElement = card.querySelector(".gallery-overlay h3");
+
+        const descriptionElement = card.querySelector(".gallery-overlay p");
+
+
+        return {
+
+            image: image ? image.src : "",
+
+            alt: image ? image.alt : "",
+
+            title: titleElement
+                ? titleElement.textContent.trim()
+                : "",
+
+            description: descriptionElement
+                ? descriptionElement.textContent.trim()
+                : ""
+
+        };
+
+    });
+
+
+
+    /*
+    -----------------------------------------
+    OPEN LIGHTBOX
+    -----------------------------------------
+    */
+
+    function openLightbox(index) {
+
+        if (!galleryItems[index]) {
+            return;
+        }
+
+
+        currentIndex = index;
+
+
+        const item = galleryItems[currentIndex];
+
+
+        lightboxImage.src = item.image;
+
+        lightboxImage.alt = item.alt;
+
+
+        lightboxTitle.textContent = item.title;
+
+
+        lightboxDescription.textContent = item.description;
+
+
+        if (item.description) {
+
+            lightboxDescription.style.display = "block";
+
+        } else {
+
+            lightboxDescription.style.display = "none";
+
+        }
+
+
+        lightbox.classList.add("active");
+
+        lightbox.setAttribute("aria-hidden", "false");
+
+
+        document.body.classList.add("gallery-lightbox-open");
+
+
+        updateNavigation();
+
+    }
+
+
+
+    /*
+    -----------------------------------------
+    CLOSE LIGHTBOX
+    -----------------------------------------
+    */
+
+    function closeLightbox() {
+
+        lightbox.classList.remove("active");
+
+        lightbox.setAttribute("aria-hidden", "true");
+
+
+        document.body.classList.remove("gallery-lightbox-open");
+
+
+        setTimeout(function () {
+
+            lightboxImage.src = "";
+
+        }, 250);
+
+    }
+
+
+
+    /*
+    -----------------------------------------
+    PREVIOUS
+    -----------------------------------------
+    */
+
+    function showPrevious() {
+
+        currentIndex--;
+
+        if (currentIndex < 0) {
+
+            currentIndex = galleryItems.length - 1;
+
+        }
+
+
+        openLightbox(currentIndex);
+
+    }
+
+
+
+    /*
+    -----------------------------------------
+    NEXT
+    -----------------------------------------
+    */
+
+    function showNext() {
+
+        currentIndex++;
+
+        if (currentIndex >= galleryItems.length) {
+
+            currentIndex = 0;
+
+        }
+
+
+        openLightbox(currentIndex);
+
+    }
+
+
+
+    /*
+    -----------------------------------------
+    NAVIGATION
+    -----------------------------------------
+    */
+
+    function updateNavigation() {
+
+        if (galleryItems.length <= 1) {
+
+            prevButton.style.display = "none";
+
+            nextButton.style.display = "none";
+
+        } else {
+
+            prevButton.style.display = "flex";
+
+            nextButton.style.display = "flex";
+
+        }
+
+    }
+
+
+
+    /*
+    -----------------------------------------
+    CARD CLICK
+    -----------------------------------------
+    */
+
+    galleryCards.forEach(function (card, index) {
+
+        card.addEventListener("click", function () {
+
+            openLightbox(index);
+
+        });
+
+
+        /*
+        Keyboard accessibility
+        */
+
+        card.addEventListener("keydown", function (event) {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+
+                openLightbox(index);
+
+            }
+
+        });
+
+    });
+
+
+
+    /*
+    -----------------------------------------
+    BUTTON EVENTS
+    -----------------------------------------
+    */
+
+    closeButton.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        closeLightbox();
+
+    });
+
+
+    prevButton.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        showPrevious();
+
+    });
+
+
+    nextButton.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        showNext();
+
+    });
+
+
+
+    /*
+    -----------------------------------------
+    CLICK OUTSIDE IMAGE
+    -----------------------------------------
+    */
+
+    lightbox.addEventListener("click", function (event) {
+
+        if (event.target === lightbox) {
+
+            closeLightbox();
+
+        }
+
+    });
+
+
+
+    /*
+    -----------------------------------------
+    KEYBOARD CONTROLS
+    -----------------------------------------
+    */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (!lightbox.classList.contains("active")) {
+            return;
+        }
+
+
+        if (event.key === "Escape") {
+
+            closeLightbox();
+
+        }
+
+
+        if (event.key === "ArrowLeft") {
+
+            showPrevious();
+
+        }
+
+
+        if (event.key === "ArrowRight") {
+
+            showNext();
+
+        }
+
+    });
+
+});
+
+</script>
 
 {% endblock %}

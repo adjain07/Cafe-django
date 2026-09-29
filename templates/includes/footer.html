@@ -1,63 +1,303 @@
+{% load static %}
+
 <footer class="site-footer">
 
-    <div class="footer-container">
+    <!-- =====================================================
+         NEWSLETTER BAR
+    ====================================================== -->
 
-        <div class="footer-brand">
+    <div class="footer-newsletter">
 
-            <h3>
-                Our Cafe
-            </h3>
+        <div class="footer-newsletter-box">
 
-            <p>
-                Fresh coffee, warm hospitality, and thoughtful food.
-            </p>
+            <div class="footer-mail-icon">
+                ✉
+            </div>
+
+            <form
+                class="footer-newsletter-form"
+                action="#"
+                method="post"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email address"
+                    aria-label="Your email address"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    aria-label="Subscribe"
+                >
+                    ➤
+                </button>
+
+            </form>
 
         </div>
 
-        <div class="footer-links">
 
-            <a href="{% url 'home' %}">
-                Home
+        <!-- TOP SOCIAL ICONS -->
+
+        <div class="footer-top-social">
+
+            <a
+                href="#"
+                aria-label="Twitter"
+            >
+                𝕏
             </a>
 
-            <a href="{% url 'about' %}">
-                About
+            <a
+                href="#"
+                aria-label="Facebook"
+            >
+                f
             </a>
 
-            <a href="{% url 'menu' %}">
-                Menu
-            </a>
-
-            <a href="{% url 'gallery' %}">
-                Gallery
-            </a>
-
-            <a href="{% url 'contact' %}">
-                Contact
-            </a>
-
-        </div>
-
-        <div class="footer-social">
-
-            <a href="#" aria-label="Instagram">
-                Instagram
-            </a>
-
-            <a href="#" aria-label="Facebook">
-                Facebook
+            <a
+                href="#"
+                aria-label="Instagram"
+            >
+                ◎
             </a>
 
         </div>
 
     </div>
+
+
+
+    <!-- =====================================================
+         MAIN FOOTER
+    ====================================================== -->
+
+    <div class="footer-main">
+
+        <div class="footer-container">
+
+            <div class="footer-grid">
+
+
+                <!-- =================================================
+                     BRAND
+                ================================================== -->
+
+                <div class="footer-brand">
+
+                    <a
+                        href="{% url 'home' %}"
+                        class="footer-logo"
+                    >
+                        Our Cafe
+                    </a>
+
+
+                    <p>
+                        Fresh coffee, delicious food, warm
+                        hospitality, and memorable moments.
+                        A place where every cup and every
+                        plate is prepared with care.
+                    </p>
+
+
+                    <a
+                        href="{% url 'menu' %}"
+                        class="footer-menu-button"
+                    >
+                        Explore Our Menu
+                    </a>
+
+                </div>
+
+                <!-- =================================================
+                     QUICK LINKS
+                ================================================== -->
+
+                <div class="footer-column">
+
+                    <h3>
+                        Quick Links
+                    </h3>
+
+
+                    <div class="footer-links">
+
+                        <a href="{% url 'home' %}">
+                            Home
+                        </a>
+
+                        <a href="{% url 'menu' %}">
+                            Menu
+                        </a>
+
+                        <a href="{% url 'gallery' %}">
+                            Gallery
+                        </a>
+
+                        <a href="{% url 'contact' %}">
+                            Contact
+                        </a>
+
+                        {% if user.is_authenticated %}
+
+                            <a href="{% url 'profile' %}">
+                                My Profile
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CONTACT
+                ================================================== -->
+
+                <div class="footer-column footer-contact">
+
+                    <h3>
+                        Contact Us
+                    </h3>
+
+
+                    <p>
+                        <strong>
+                            Address:
+                        </strong>
+
+                        Your Cafe Address,
+                        Jaipur, Rajasthan, India.
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Call:
+                        </strong>
+
+                        <a href="tel:+919876543210">
+                            +91 98765 43210
+                        </a>
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Mail:
+                        </strong>
+
+                        <a href="mailto:info@ourcafe.com">
+                            info@ourcafe.com
+                        </a>
+                    </p>
+
+
+                    <!-- SOCIAL -->
+
+                    <div class="footer-social-icons">
+
+                        <a
+                            href="#"
+                            aria-label="Twitter"
+                        >
+                            𝕏
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+                            f
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            ◎
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER BOTTOM
+    ====================================================== -->
 
     <div class="footer-bottom">
 
-        <span>
-            &copy; {% now "Y" %} Our Cafe. All rights reserved.
-        </span>
+        <div class="footer-bottom-container">
+
+
+            <div class="footer-copyright">
+
+                &copy;
+                {% now "Y" %}
+                Our Cafe.
+                All Rights Reserved.
+
+            </div>
+
+
+            <!-- PAYMENT METHODS -->
+
+            <div class="footer-payments">
+
+                <span>
+                    PayPal
+                </span>
+
+                <span>
+                    VISA
+                </span>
+
+                <span>
+                    MasterCard
+                </span>
+
+                <span>
+                    DISCOVER
+                </span>
+
+            </div>
+
+        </div>
 
     </div>
+
+
+
+    <!-- =====================================================
+         WHATSAPP FLOATING BUTTON
+    ====================================================== -->
+
+    <a
+        href="https://wa.me/919876543210"
+        class="footer-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+    >
+        ☎
+    </a>
 
 </footer>

@@ -3,7 +3,7 @@
 ========================================= */
 
 .contact-hero {
-    min-height: 420px;
+    min-height: 120px;
 
     display: flex;
 
@@ -96,7 +96,7 @@
 ========================================= */
 
 .contact-section {
-    padding: 90px 0;
+    padding: 60px 0;
 
     background: #fffaf5;
 }
@@ -165,7 +165,7 @@
 
     gap: 18px;
 
-    padding: 28px 22px;
+    padding: 22px 22px;
 
     background: #fff;
 
@@ -254,7 +254,7 @@
 ========================================= */
 
 .contact-main {
-    padding: 100px 0;
+    padding: 10px 0;
 
     background: #ffffff;
 }
@@ -266,9 +266,9 @@
     grid-template-columns:
         1fr 1fr;
 
-    gap: 70px;
+    gap: 55px;
 
-    align-items: start;
+    align-items: stretch;
 }
 
 
@@ -278,7 +278,65 @@
 ========================================= */
 
 .contact-form-wrapper {
-    padding-right: 20px;
+    position: relative;
+
+    padding: 34px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf9 0%,
+            #fffaf4 100%
+        );
+
+    border: 1px solid #e4d2bf;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 55px
+        rgba(45, 27, 18, 0.10);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+.contact-form-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2d1b12 0%,
+            #9b6334 50%,
+            #f0b672 100%
+        );
+}
+
+.contact-form-wrapper::after {
+    content: "✦";
+
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    color: rgba(155, 99, 52, 0.16);
+
+    font-size: 58px;
+
+    line-height: 1;
+
+    pointer-events: none;
 }
 
 
@@ -294,23 +352,33 @@
 
 
 .contact-form-wrapper h2 {
-    margin: 12px 0;
+    margin: 10px 0 12px;
 
     color: #2d1b12;
 
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(34px, 3vw, 40px);
+    font-size: clamp(32px, 3vw, 40px);
 
     font-weight: 500;
+
+    line-height: 1.15;
+
+    letter-spacing: -0.02em;
+
+    position: relative;
+
+    z-index: 1;
 }
 
 
 .form-description {
-    margin: 0 0 35px;
+    margin: 0 0 26px;
 
     color: #613d24;
 
-    line-height: 1.7;
+    line-height: 1.65;
+
+    font-size: 14px;
 }
 
 
@@ -323,14 +391,14 @@
     display: grid;
 
     grid-template-columns:
-        1fr 1fr;
+        repeat(2, minmax(0, 1fr));
 
-    gap: 20px;
+    gap: 16px;
 }
 
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 
@@ -339,11 +407,15 @@
 
     margin-bottom: 8px;
 
-    font-size: 14px;
+    color: #3d281b;
 
-    font-weight: 600;
+    font-size: 11px;
 
-    color: #333;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    text-transform: uppercase;
 }
 
 
@@ -351,13 +423,15 @@
 .form-group textarea {
     width: 100%;
 
-    padding: 14px 15px;
+    padding: 13px 16px;
 
-    border: 1px solid #ddd8d1;
+    border: 1px solid #ddcbbb;
 
-    background: #faf9f7;
+    border-radius: 8px;
 
-    color: #222;
+    background: rgba(255, 255, 255, 0.92);
+
+    color: #2d1b12;
 
     font-family: inherit;
 
@@ -365,9 +439,21 @@
 
     outline: none;
 
+    box-sizing: border-box;
+
+    box-shadow:
+        inset 0 1px 2px rgba(45, 27, 18, 0.03);
+
     transition:
-        border-color 0.2s ease,
-        background 0.2s ease;
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #c9ad92;
 }
 
 
@@ -379,53 +465,188 @@
 .form-group textarea {
     resize: vertical;
 
-    min-height: 140px;
+    min-height: 125px;
 }
 
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #6f4e37;
+    border-color: #9b6334;
 
-    background: white;
+    background: #fffdf9;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 0 3px rgba(155, 99, 52, 0.10),
+        0 8px 20px rgba(45, 27, 18, 0.06);
 }
 
 
-.contact-submit {
+.contact-submit,
+.contact-form button[type="submit"],
+.contact-form input[type="submit"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+
+    min-height: 58px;
+
+    margin-top: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    padding: 0 22px;
+
+    border: 1px solid #8f5c31;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #24150d 0%,
+            #3b2114 45%,
+            #754b2b 100%
+        );
+
+    color: #fffaf5;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 0 rgba(45, 27, 18, 0.08),
+        0 14px 28px rgba(45, 27, 18, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+/* Soft light sweep */
+.contact-submit::before,
+.contact-form button[type="submit"]::before,
+.contact-form input[type="submit"]::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            100deg,
+            transparent,
+            rgba(255, 255, 255, 0.16),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.65s ease;
+
+    pointer-events: none;
+}
+
+/* Keep any existing span as a premium circular arrow badge */
+.contact-submit span {
+    width: 30px;
+
+    height: 30px;
+
     display: inline-flex;
 
     align-items: center;
 
-    gap: 18px;
+    justify-content: center;
 
-    padding: 15px 25px;
+    border: 1px solid rgba(255, 250, 245, 0.35);
 
-    border: none;
+    border-radius: 50%;
 
-    background: #211a16;
+    background: rgba(255, 250, 245, 0.10);
 
-    color: white;
+    color: #f0b672;
 
-    font-family: inherit;
+    font-size: 17px;
 
-    font-size: 14px;
-
-    cursor: pointer;
+    line-height: 1;
 
     transition:
-        background 0.3s ease;
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
+.contact-submit:hover,
+.contact-form button[type="submit"]:hover,
+.contact-form input[type="submit"]:hover {
+    border-color: #c88a4a;
 
-.contact-submit span {
-    font-size: 20px;
+    background:
+        linear-gradient(
+            135deg,
+            #2d1b12 0%,
+            #6f4e37 48%,
+            #a96f3d 100%
+        );
 
-    line-height: 0;
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 rgba(45, 27, 18, 0.08),
+        0 18px 34px rgba(45, 27, 18, 0.24);
 }
 
+.contact-submit:hover::before,
+.contact-form button[type="submit"]:hover::before,
+.contact-form input[type="submit"]:hover::before {
+    left: 140%;
+}
 
-.contact-submit:hover {
-    background: #6f4e37;
+.contact-submit:hover span {
+    background: #f0b672;
+
+    color: #2d1b12;
+
+    transform: translateX(4px) rotate(-5deg);
+}
+
+.contact-submit:active,
+.contact-form button[type="submit"]:active,
+.contact-form input[type="submit"]:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 0 rgba(45, 27, 18, 0.08),
+        0 9px 18px rgba(45, 27, 18, 0.16);
 }
 
 
@@ -598,7 +819,7 @@
 
 
     .contact-form-wrapper {
-        padding-right: 0;
+        padding: 28px;
     }
 
 }
@@ -671,6 +892,125 @@
         font-size: 30px;
     }
 
+}
+
+
+/* =========================================
+   CONTACT FORM POLISH
+========================================= */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a08d7d;
+}
+
+@media (max-width: 600px) {
+
+    .contact-form-wrapper {
+        padding: 24px 18px;
+        border-radius: 10px;
+    }
+
+    .contact-form-wrapper::after {
+        font-size: 42px;
+        top: 16px;
+        right: 16px;
+    }
+
+    .form-group input {
+        height: 48px;
+    }
+
+    .form-group textarea {
+        min-height: 115px;
+    }
+
+    .contact-submit {
+        width: 100%;
+        min-height: 54px;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+    }
+
+    .contact-submit span {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+}
+
+
+
+/* =========================================
+   SUBMIT BUTTON - FORCE PREMIUM STYLE
+   Works even if HTML uses a plain submit button
+========================================= */
+
+.contact-form button[type="submit"],
+.contact-form input[type="submit"] {
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.8px !important;
+    text-transform: uppercase !important;
+    color: #fffaf5 !important;
+
+    min-height: 58px !important;
+    width: 100% !important;
+
+    border: 1px solid #8f5c31 !important;
+    border-radius: 8px !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #24150d 0%,
+            #3b2114 45%,
+            #754b2b 100%
+        ) !important;
+
+    box-shadow:
+        0 8px 0 rgba(45, 27, 18, 0.08),
+        0 14px 28px rgba(45, 27, 18, 0.18) !important;
+
+    cursor: pointer !important;
+
+    padding: 0 22px !important;
+    box-sizing: border-box !important;
+}
+
+.contact-form button[type="submit"]:hover,
+.contact-form input[type="submit"]:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #2d1b12 0%,
+            #6f4e37 48%,
+            #a96f3d 100%
+        ) !important;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 rgba(45, 27, 18, 0.08),
+        0 18px 34px rgba(45, 27, 18, 0.24) !important;
+}
+
+.contact-form button[type="submit"]:focus,
+.contact-form input[type="submit"]:focus {
+    outline: none !important;
+
+    box-shadow:
+        0 0 0 3px rgba(155, 99, 52, 0.18),
+        0 14px 28px rgba(45, 27, 18, 0.18) !important;
+}
+
+@media (max-width: 600px) {
+    .contact-form button[type="submit"],
+    .contact-form input[type="submit"] {
+        min-height: 54px !important;
+        font-size: 12px !important;
+    }
 }
 
 /* =========================================
@@ -772,4 +1112,225 @@
 
 .success-button:hover {
     background: linear-gradient(135deg, #3b2515 0%, #9b6334 100%);
+}
+
+
+/* =========================================================
+   FINAL SEND MESSAGE BUTTON OVERRIDE
+   Targets the actual button inside the contact form wrapper
+========================================================= */
+
+.contact-form-wrapper button,
+.contact-form-wrapper button[type="submit"],
+.contact-form-wrapper input[type="submit"],
+.contact-submit {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 58px !important;
+    min-height: 58px !important;
+
+    margin: 8px 0 0 !important;
+    padding: 0 24px !important;
+
+    border: 1px solid #9b6334 !important;
+    border-radius: 10px !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #21150f 0%,
+            #3d2416 45%,
+            #8a5a32 100%
+        ) !important;
+
+    color: #fffaf5 !important;
+
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+
+    text-align: center !important;
+    text-decoration: none !important;
+
+    cursor: pointer !important;
+
+    box-sizing: border-box !important;
+
+    outline: none !important;
+
+    box-shadow:
+        0 4px 0 #24160e,
+        0 12px 25px rgba(45, 27, 18, 0.20) !important;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease !important;
+}
+
+/* Button text */
+.contact-form-wrapper button::first-line {
+    color: #fffaf5 !important;
+}
+
+/* Hover */
+.contact-form-wrapper button:hover,
+.contact-form-wrapper button[type="submit"]:hover,
+.contact-form-wrapper input[type="submit"]:hover,
+.contact-submit:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #3a2114 0%,
+            #754a2a 50%,
+            #c08443 100%
+        ) !important;
+
+    border-color: #d19a5a !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-3px) !important;
+
+    box-shadow:
+        0 5px 0 #24160e,
+        0 18px 35px rgba(45, 27, 18, 0.28) !important;
+}
+
+/* Click */
+.contact-form-wrapper button:active,
+.contact-form-wrapper button[type="submit"]:active,
+.contact-form-wrapper input[type="submit"]:active,
+.contact-submit:active {
+    transform: translateY(1px) !important;
+
+    box-shadow:
+        0 2px 0 #24160e,
+        0 7px 15px rgba(45, 27, 18, 0.18) !important;
+}
+
+/* Focus */
+.contact-form-wrapper button:focus,
+.contact-form-wrapper button[type="submit"]:focus,
+.contact-form-wrapper input[type="submit"]:focus,
+.contact-submit:focus {
+    outline: none !important;
+
+    border-color: #d19a5a !important;
+
+    box-shadow:
+        0 0 0 4px rgba(240, 182, 114, 0.18),
+        0 12px 25px rgba(45, 27, 18, 0.20) !important;
+}
+
+/* Prevent browser disabled/default look */
+.contact-form-wrapper button:not(:disabled),
+.contact-form-wrapper input[type="submit"]:not(:disabled) {
+    opacity: 1 !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .contact-form-wrapper button,
+    .contact-form-wrapper button[type="submit"],
+    .contact-form-wrapper input[type="submit"],
+    .contact-submit {
+        width: 100% !important;
+        min-width: 100% !important;
+        height: 54px !important;
+        min-height: 54px !important;
+
+        font-size: 12px !important;
+        letter-spacing: 1.2px !important;
+    }
+}
+
+
+/* =========================================================
+   FORM + MAP - EXACT SAME HEIGHT
+========================================================= */
+
+@media (min-width: 1001px) {
+
+    /*
+       The grid row gets its height from the taller form.
+       Both columns stretch to that exact row height.
+    */
+    .contact-columns {
+        align-items: stretch;
+    }
+
+    .contact-form-wrapper {
+        height: 100%;
+        min-height: 0;
+        box-sizing: border-box;
+    }
+
+    /*
+       Make the complete map column fill the same height as
+       the form. The map itself expands into the available
+       space, so there is no white gap below it.
+    */
+    .map-wrapper {
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        box-sizing: border-box;
+    }
+
+    .map-header {
+        flex: 0 0 auto;
+    }
+
+    .map-container {
+        width: 100%;
+        flex: 1 1 auto;
+        height: auto;
+        min-height: 0;
+        box-sizing: border-box;
+    }
+
+    .map-address {
+        flex: 0 0 auto;
+        box-sizing: border-box;
+    }
+}
+
+/* Tablet / Mobile: natural stacked layout */
+@media (max-width: 1000px) {
+
+    .contact-form-wrapper {
+        height: auto;
+        min-height: 0;
+    }
+
+    .map-wrapper {
+        height: auto;
+        min-height: 0;
+        display: block;
+    }
+
+    .map-container {
+        height: 430px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .map-container {
+        height: 350px;
+    }
 }

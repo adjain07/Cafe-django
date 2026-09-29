@@ -193,18 +193,6 @@
                     </div>
 
 
-                    <!-- Update Cart Button -->
-                    <div class="cart-update-area">
-
-                        <button
-                            type="submit"
-                            class="update-cart-btn"
-                        >
-                            <span>Update Cart</span>
-                            <span>↻</span>
-                        </button>
-
-                    </div>
 
                 </form>
 
@@ -410,6 +398,127 @@
 
 <script>
 
+/*
+    CART AUTO PRICE UPDATE
+
+    Quantity change hote hi:
+    1. Item subtotal update
+    2. Order summary subtotal update
+    3. Final total update
+
+    Server-side total bhi Update Cart submit par recalculate hoga.
+*/
+
+function formatPrice(amount) {
+    return Number(amount).toFixed(2);
+}
+
+
+function updateCartPrices() {
+
+    let grandTotal = 0;
+
+    document.querySelectorAll(".cart-item").forEach(function (item) {
+
+        const quantityInput = item.querySelector(".quantity-input");
+        const itemPriceElement = item.querySelector(".item-price");
+        const subtotalElement = item.querySelector(".cart-item-total strong");
+
+        if (!quantityInput || !itemPriceElement || !subtotalElement) {
+            return;
+        }
+
+        const quantity = Math.max(
+            1,
+            Math.min(20, parseInt(quantityInput.value) || 1)
+        );
+
+        const price = parseFloat(
+            itemPriceElement.textContent.replace(/[^0-9.]/g, "")
+        ) || 0;
+
+        const subtotal = price * quantity;
+
+        subtotalElement.textContent = "₹" + formatPrice(subtotal);
+
+        grandTotal += subtotal;
+    });
+
+
+    /* Main summary subtotal */
+    const summaryRows = document.querySelectorAll(".summary-row");
+
+    summaryRows.forEach(function (row) {
+
+        const label = row.querySelector("span");
+
+        if (
+            label &&
+            label.textContent.trim().toLowerCase() === "subtotal"
+        ) {
+            const value = row.querySelector("span:last-child");
+
+            if (value) {
+                value.textContent = "₹" + formatPrice(grandTotal);
+            }
+        }
+    });
+
+
+    /* Final total */
+    const finalTotal = document.querySelector(
+        ".summary-total strong"
+    );
+
+    if (finalTotal) {
+        finalTotal.textContent = "₹" + formatPrice(grandTotal);
+    }
+
+
+    /* Right-side individual item subtotals */
+    document.querySelectorAll(".summary-item").forEach(function (summaryItem) {
+
+        const itemName = summaryItem.querySelector("div span");
+        const quantityText = summaryItem.querySelector("small");
+        const priceElement = summaryItem.querySelector("strong");
+
+        if (!itemName || !quantityText || !priceElement) {
+            return;
+        }
+
+        const cartItem = Array.from(
+            document.querySelectorAll(".cart-item")
+        ).find(function (item) {
+
+            const name = item.querySelector(".cart-item-info h3");
+
+            return (
+                name &&
+                name.textContent.trim() === itemName.textContent.trim()
+            );
+        });
+
+        if (!cartItem) {
+            return;
+        }
+
+        const quantityInput = cartItem.querySelector(".quantity-input");
+        const itemPriceElement = cartItem.querySelector(".item-price");
+
+        const quantity = parseInt(quantityInput.value) || 1;
+
+        const price = parseFloat(
+            itemPriceElement.textContent.replace(/[^0-9.]/g, "")
+        ) || 0;
+
+        priceElement.textContent =
+            "₹" + formatPrice(price * quantity);
+
+        quantityText.textContent = "× " + quantity;
+    });
+}
+
+
 function changeQuantity(itemId, change) {
 
     const input = document.getElementById(
@@ -428,18 +537,54 @@ function changeQuantity(itemId, change) {
 
     quantity += change;
 
-    // Minimum quantity = 1
+    /* Minimum quantity = 1 */
     if (quantity < 1) {
         quantity = 1;
     }
 
-    // Maximum quantity = 20
+    /* Maximum quantity = 20 */
     if (quantity > 20) {
         quantity = 20;
     }
 
     input.value = quantity;
+
+    /* Immediately update prices */
+    updateCartPrices();
 }
+
+
+/* Manual quantity typing */
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".quantity-input").forEach(function (input) {
+
+        input.addEventListener("input", function () {
+            updateCartPrices();
+        });
+
+        input.addEventListener("change", function () {
+
+            let quantity = parseInt(this.value) || 1;
+
+            if (quantity < 1) {
+                quantity = 1;
+            }
+
+            if (quantity > 20) {
+                quantity = 20;
+            }
+
+            this.value = quantity;
+
+            updateCartPrices();
+        });
+
+    });
+
+    /* Initial calculation */
+    updateCartPrices();
+});
 
 </script>
 
