@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.contrib.auth.decorators import login_required
 from menu.models import MenuItem
 
 from .models import Order, OrderItem
@@ -14,6 +14,7 @@ from .forms import CheckoutForm
 # ADD TO CART
 # =========================================================
 
+@login_required
 def add_to_cart(request, item_id):
 
     item = get_object_or_404(
@@ -49,7 +50,7 @@ def add_to_cart(request, item_id):
 # =========================================================
 # CART
 # =========================================================
-
+@login_required
 def cart(request):
 
     cart_data = request.session.get('cart', {})
