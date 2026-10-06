@@ -72,4 +72,10 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
+
+    path(
+    "test-email/",
+    views.test_email,
+    name="test_email"
+),
 ]

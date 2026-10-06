@@ -1,29 +1,31 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 
 
 def login_view(request):
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request,username=username,password=password)
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
         if user is not None:
             login(request, user)
-            messages.success(request,'You are now logged in.')
-            return redirect('home')
-        
-        messages.error(request,'Invalid username or password.')
+            messages.success(request, "You are now logged in.")
+            return redirect("home")
 
-    return render(request,'accounts/login.html')
+        messages.error(request, "Invalid username or password.")
 
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
+    return render(request, "accounts/login.html")
 
 
 def register(request):
@@ -68,9 +70,27 @@ def register(request):
 
 def logout_view(request):
     logout(request)
-    messages.success(request,'You have been logged out.')
-    return redirect('home')
+    messages.success(request, "You have been logged out.")
+    return redirect("home")
+
 
 @login_required
 def profile(request):
-    return render(request,'accounts/profile.html')
+    return render(request, "accounts/profile.html")
+
+
+# TEMPORARY EMAIL TEST
+def test_email(request):
+
+    send_mail(
+        "Cafe Django Test Email",
+        "This is a test email from the Render deployed Cafe Django website.",
+        None,
+        ["YOUR_RECEIVING_EMAIL@gmail.com"],
+        fail_silently=False,
+    )
+
+    return render(
+        request,
+        "accounts/password_reset_done.html"
+    )
