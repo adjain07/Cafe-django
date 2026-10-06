@@ -98,38 +98,38 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Cafe_Project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 # =========================
 # DATABASE
 # =========================
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-
 if DATABASE_URL:
     import dj_database_url
 
+    # Production / Render database
     DATABASES = {
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
-            ssl_require=True,
+            ssl_require=not DATABASE_URL.startswith(
+                ("postgres://localhost", "postgresql://localhost")
+            ),
         )
     }
+
 else:
     # Local development PostgreSQL
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'cafe_django',
-            'USER': 'Cafe_User',
-            'PASSWORD': os.getenv('DBPASSWORD'),
-            'HOST': 'localhost',
-            'PORT': '5432'
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "cafe_django",
+            "USER": "Cafe_User",
+            "PASSWORD": os.getenv("DBPASSWORD"),
+            "HOST": "localhost",
+            "PORT": "5432",
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -179,16 +179,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
 # =========================
-# EMAIL CONFIGURATION
+# EMAIL CONFIGURATION - BREVO
 # =========================
 
-EMAIL_BACKEND = "accounts.email_backend.ResendEmailBackend"
+EMAIL_BACKEND = "accounts.email_backend.BrevoEmailBackend"
 
-RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+BREVO_API_KEY = os.getenv("BREVO_API_KEY")
 
 DEFAULT_FROM_EMAIL = os.getenv(
-    "DEFAULT_FROM_EMAIL",
-    "onboarding@resend.dev"
+    "DEFAULT_FROM_EMAIL"
 )
 
 # Production security

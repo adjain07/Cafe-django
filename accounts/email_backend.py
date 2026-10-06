@@ -1,40 +1,45 @@
-import resend
+import sib_api_v3_sdk
 
 from django.conf import settings
 from django.core.mail.backends.base import BaseEmailBackend
-from django.core.mail import EmailMultiAlternatives
 
 
-class ResendEmailBackend(BaseEmailBackend):
-
-    def __init__(self, fail_silently=False, **kwargs):
-        super().__init__(fail_silently=fail_silently, **kwargs)
-
-        resend.api_key = settings.RESEND_API_KEY
+class BrevoEmailBackend(BaseEmailBackend):
 
     def send_messages(self, email_messages):
         if not email_messages:
             return 0
 
+        configuration = sib_api_v3_sdk.Configuration()
+        configuration.api_key["api-key"] = settings.BREVO_API_KEY
+
+        api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+            sib_api_v3_sdk.ApiClient(configuration)
+        )
+
         sent_count = 0
 
         for message in email_messages:
             try:
-                params = {
-                    "from": message.from_email or settings.DEFAULT_FROM_EMAIL,
-                    "to": message.to,
-                    "subject": message.subject,
-                    "text": message.body,
-                }
+                sender = sib_api_v3_sdk.SendSmtpEmailSender(
+                email=message.from_email or settings.DEFAULT_FROM_EMAIL
+                )
 
-                # HTML alternative ho to Resend ko HTML bhi bhejo
-                if isinstance(message, EmailMultiAlternatives):
-                    for alternative, mimetype in message.alternatives:
-                        if mimetype == "text/html":
-                            params["html"] = alternative
-                            break
+                recipients = [
+                    sib_api_v3_sdk.SendSmtpEmailTo(
+                        email=recipient
+                    )
+                    for recipient in message.to
+                ]
 
-                resend.Emails.send(params)
+                email_data = sib_api_v3_sdk.SendSmtpEmail(
+                    sender=sender,
+                    to=recipients,
+                    subject=message.subject,
+                    text_content=message.body,
+                )
+
+                api_instance.send_transac_email(email_data)
 
                 sent_count += 1
 
@@ -43,3 +48,4 @@ class ResendEmailBackend(BaseEmailBackend):
                     raise
 
         return sent_count
+
