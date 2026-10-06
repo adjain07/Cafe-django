@@ -188,7 +188,7 @@ RESEND_API_KEY = os.getenv("RESEND_API_KEY")
 
 DEFAULT_FROM_EMAIL = os.getenv(
     "DEFAULT_FROM_EMAIL",
-    "delivered@resend.dev"
+    "onboarding@resend.dev"
 )
 
 # Production security
