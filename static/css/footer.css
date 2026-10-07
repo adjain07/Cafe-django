@@ -1,9 +1,9 @@
 /* =========================================================
    PREMIUM CAFE FOOTER
+   FINAL RESPONSIVE VERSION
 ========================================================= */
 
 :root {
-
     --footer-dark: #242424;
     --footer-dark-2: #202020;
     --footer-panel: #303030;
@@ -16,9 +16,7 @@
     --footer-text: #eeeeee;
     --footer-muted: #b9b9b9;
 
-    --footer-border:
-        rgba(255, 255, 255, 0.08);
-
+    --footer-border: rgba(255, 255, 255, 0.08);
 }
 
 
@@ -27,17 +25,13 @@
 ========================================================= */
 
 .site-footer {
-
     position: relative;
-
     width: 100%;
 
     background: var(--footer-dark);
-
     color: var(--footer-text);
 
     overflow: hidden;
-
 }
 
 
@@ -46,89 +40,64 @@
 ========================================================= */
 
 .footer-newsletter {
-
-    width: min(
-        1200px,
-        calc(100% - 48px)
-    );
+    width: min(1200px, calc(100% - 48px));
 
     min-height: 85px;
 
     margin: 0 auto;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 20px;
-
 }
 
-
-/* =========================================================
-   NEWSLETTER LEFT
-========================================================= */
 
 .footer-newsletter-box {
-
     display: flex;
-
     align-items: center;
 
-    gap: 9px;
-
+    gap: 12px;
 }
 
 
-/* =========================================================
-   MAIL ICON
-========================================================= */
-
 .footer-mail-icon {
-
     width: 46px;
     height: 46px;
 
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    border: 2px solid
-        var(--footer-brown);
-
+    border: 2px solid var(--footer-brown);
     border-radius: 50%;
 
     color: var(--footer-gold);
-
-    font-size: 17px;
-
 }
 
 
-/* =========================================================
-   NEWSLETTER FORM
-========================================================= */
+.footer-mail-icon svg {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+}
+
 
 .footer-newsletter-form {
-
     width: 360px;
-
     height: 44px;
 
     display: flex;
 
     background: var(--footer-panel);
-
 }
 
 
 .footer-newsletter-form input {
-
     flex: 1;
 
     min-width: 0;
@@ -138,60 +107,50 @@
     padding: 0 16px;
 
     border: none;
-
     outline: none;
 
     background: transparent;
 
     color: #ffffff;
 
-    font-size: 12px;
-
+    font-size: 13px;
 }
 
 
 .footer-newsletter-form input::placeholder {
-
     color: #eeeeee;
-
-    opacity: 1;
-
 }
 
 
 .footer-newsletter-form button {
-
     width: 55px;
 
     flex-shrink: 0;
 
     border: none;
 
-    border-left:
-        1px solid
-        rgba(255, 255, 255, 0.08);
+    border-left: 1px solid var(--footer-border);
 
     background: transparent;
 
     color: #ffffff;
 
-    font-size: 17px;
-
     cursor: pointer;
-
-    transition:
-        background 0.25s ease,
-        color 0.25s ease;
-
 }
 
 
 .footer-newsletter-form button:hover {
-
     background: var(--footer-brown);
+}
 
-    color: #ffffff;
 
+.footer-newsletter-form button svg {
+    width: 18px;
+    height: 18px;
+
+    display: block;
+
+    margin: auto;
 }
 
 
@@ -200,23 +159,18 @@
 ========================================================= */
 
 .footer-top-social {
-
     display: flex;
-
     align-items: center;
 
-    gap: 20px;
-
+    gap: 18px;
 }
 
 
 .footer-top-social a {
-
     width: 28px;
     height: 28px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -224,23 +178,26 @@
 
     text-decoration: none;
 
-    font-size: 17px;
-
-    font-weight: 700;
+    line-height: 0;
 
     transition:
         color 0.25s ease,
         transform 0.25s ease;
-
 }
 
 
 .footer-top-social a:hover {
-
     color: var(--footer-gold);
 
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+}
 
+
+.footer-top-social a svg {
+    width: 17px;
+    height: 17px;
+
+    display: block;
 }
 
 
@@ -249,48 +206,35 @@
 ========================================================= */
 
 .footer-main {
+    padding: 34px 0 30px;
 
-    border-top:
-        1px solid
-        var(--footer-border);
-
-    border-bottom:
-        1px solid
-        var(--footer-border);
-
-    padding: 35px 0 30px;
-
+    border-top: 1px solid var(--footer-border);
+    border-bottom: 1px solid var(--footer-border);
 }
 
 
 .footer-container {
-
-    width: min(
-        1200px,
-        calc(100% - 48px)
-    );
+    width: min(1180px, calc(100% - 48px));
 
     margin: 0 auto;
-
 }
 
 
 /* =========================================================
-   FOOTER GRID
+   DESKTOP GRID
 ========================================================= */
 
 .footer-grid {
-
     display: grid;
 
     grid-template-columns:
-        1.8fr
-        1fr
-        1fr
-        1.35fr;
+        minmax(0, 1.6fr)
+        minmax(150px, 0.8fr)
+        minmax(220px, 1.25fr);
 
-    gap: 35px;
+    gap: 55px;
 
+    align-items: start;
 }
 
 
@@ -299,17 +243,16 @@
 ========================================================= */
 
 .footer-brand {
+    min-width: 0;
 
-    max-width: 360px;
-
+    max-width: 390px;
 }
 
 
 .footer-logo {
-
     display: inline-block;
 
-    margin-bottom: 12px;
+    margin-bottom: 11px;
 
     color: var(--footer-gold);
 
@@ -325,20 +268,17 @@
     letter-spacing: 0.02em;
 
     text-decoration: none;
-
 }
 
 
 .footer-brand p {
-
-    margin: 0 0 15px;
+    margin: 0 0 14px;
 
     color: #d8d8d8;
 
-    font-size: 12px;
+    font-size: 13px;
 
-    line-height: 1.8;
-
+    line-height: 1.6;
 }
 
 
@@ -347,19 +287,16 @@
 ========================================================= */
 
 .footer-menu-button {
-
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
-    min-height: 40px;
+    min-height: 36px;
 
-    padding: 0 18px;
+    padding: 0 16px;
 
-    border: 1px solid
-        rgba(215, 164, 95, 0.55);
+    border: 1px solid rgba(215, 164, 95, 0.55);
 
     border-radius: 999px;
 
@@ -367,21 +304,21 @@
 
     text-decoration: none;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 700;
+
+    box-sizing: border-box;
 
     transition:
         background 0.25s ease,
         color 0.25s ease,
         border-color 0.25s ease,
         transform 0.25s ease;
-
 }
 
 
 .footer-menu-button:hover {
-
     background: var(--footer-brown);
 
     border-color: var(--footer-brown);
@@ -389,17 +326,20 @@
     color: #ffffff;
 
     transform: translateY(-2px);
-
 }
 
 
 /* =========================================================
-   FOOTER COLUMN
+   FOOTER COLUMNS
 ========================================================= */
 
-.footer-column h3 {
+.footer-column {
+    min-width: 0;
+}
 
-    margin: 0 0 14px;
+
+.footer-column h3 {
+    margin: 0 0 13px;
 
     color: #ffffff;
 
@@ -411,50 +351,44 @@
     font-size: 17px;
 
     font-weight: 600;
-
 }
 
 
 /* =========================================================
-   FOOTER LINKS
+   QUICK LINKS
+   DESKTOP = VERTICAL
 ========================================================= */
 
 .footer-links {
-
     display: flex;
 
     flex-direction: column;
 
-    gap: 9px;
-
+    gap: 8px;
 }
 
 
 .footer-links a {
-
     width: fit-content;
 
     color: #dddddd;
 
     text-decoration: none;
 
-    font-size: 12px;
+    font-size: 13px;
 
     line-height: 1.4;
 
     transition:
         color 0.25s ease,
-        padding-left 0.25s ease;
-
+        transform 0.25s ease;
 }
 
 
 .footer-links a:hover {
-
     color: var(--footer-gold-light);
 
-    padding-left: 5px;
-
+    transform: translateX(4px);
 }
 
 
@@ -462,42 +396,40 @@
    CONTACT
 ========================================================= */
 
-.footer-contact p {
+.footer-contact {
+    min-width: 0;
+}
 
+
+.footer-contact p {
     margin: 0 0 8px;
 
     color: #dddddd;
 
-    font-size: 12px;
+    font-size: 13px;
 
     line-height: 1.5;
 
+    overflow-wrap: anywhere;
 }
 
 
 .footer-contact strong {
-
     color: #ffffff;
-
 }
 
 
 .footer-contact a {
-
     color: #dddddd;
 
     text-decoration: none;
 
-    transition:
-        color 0.25s ease;
-
+    transition: color 0.25s ease;
 }
 
 
 .footer-contact a:hover {
-
     color: var(--footer-gold-light);
-
 }
 
 
@@ -506,30 +438,30 @@
 ========================================================= */
 
 .footer-social-icons {
-
     display: flex;
 
     align-items: center;
 
+    justify-content: flex-start;
+
     gap: 9px;
 
     margin-top: 13px;
-
 }
 
 
 .footer-social-icons a {
+    width: 34px;
+    height: 34px;
 
-    width: 30px;
-    height: 30px;
+    flex: 0 0 34px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border: 1px solid
-        rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 
     border-radius: 50%;
 
@@ -539,26 +471,34 @@
 
     text-decoration: none;
 
-    font-size: 12px;
+    line-height: 0;
 
-    font-weight: 700;
+    box-sizing: border-box;
 
     transition:
         background 0.25s ease,
         border-color 0.25s ease,
-        transform 0.25s ease;
-
+        transform 0.25s ease,
+        color 0.25s ease;
 }
 
 
 .footer-social-icons a:hover {
-
     background: var(--footer-brown);
 
     border-color: var(--footer-brown);
 
-    transform: translateY(-2px);
+    color: #ffffff;
 
+    transform: translateY(-2px);
+}
+
+
+.footer-social-icons a svg {
+    width: 17px;
+    height: 17px;
+
+    display: block;
 }
 
 
@@ -567,20 +507,16 @@
 ========================================================= */
 
 .footer-bottom {
+    width: 100%;
 
     background: var(--footer-dark-2);
-
 }
 
 
 .footer-bottom-container {
+    width: min(1180px, calc(100% - 48px));
 
-    width: min(
-        1200px,
-        calc(100% - 48px)
-    );
-
-    min-height: 55px;
+    min-height: 56px;
 
     margin: 0 auto;
 
@@ -590,27 +526,29 @@
 
     justify-content: space-between;
 
-    gap: 15px;
-
+    gap: 20px;
 }
 
 
 .footer-copyright {
+    flex: 1 1 auto;
+
+    min-width: 0;
 
     color: #bdbdbd;
 
     font-size: 11px;
 
     line-height: 1.5;
-
 }
 
 
 /* =========================================================
-   PAYMENT METHODS
+   PAYMENT LOGOS
 ========================================================= */
 
 .footer-payments {
+    flex: 0 0 auto;
 
     display: flex;
 
@@ -620,41 +558,107 @@
 
     flex-wrap: wrap;
 
-    gap: 9px;
-
+    gap: 7px;
 }
 
 
-.footer-payments span {
+.footer-payments .payment-logo {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+
+    min-width: 54px;
+
+    height: 28px;
+
+    padding: 3px 7px;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    border-radius: 5px;
+
+    background: rgba(255, 255, 255, 0.04);
 
     color: #ffffff;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    box-sizing: border-box;
 
-    font-size: 12px;
+    line-height: 0;
 
-    font-weight: 800;
+    opacity: 0.92;
 
-    font-style: italic;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
 
-    opacity: 0.9;
 
+.footer-payments .payment-logo:hover {
+    background: rgba(155, 102, 55, 0.22);
+
+    border-color:
+        rgba(215, 164, 95, 0.55);
+
+    opacity: 1;
+
+    transform: translateY(-2px);
+}
+
+
+.footer-payments .payment-logo svg {
+    display: block;
+
+    width: auto;
+
+    height: 19px;
+
+    max-width: 70px;
+}
+
+
+.footer-payments .payment-paypal svg {
+    width: 62px;
+}
+
+
+.footer-payments .payment-visa svg {
+    width: 45px;
+}
+
+
+.footer-payments .payment-mastercard svg {
+    width: 55px;
+}
+
+
+.footer-payments .payment-discover svg {
+    width: 70px;
+}
+
+
+.footer-payments .payment-rupay svg {
+    width: 52px;
+}
+
+
+.footer-payments .payment-upi svg {
+    width: 38px;
 }
 
 
 /* =========================================================
-   WHATSAPP BUTTON
+   WHATSAPP
 ========================================================= */
 
 .footer-whatsapp {
-
     position: fixed;
 
     right: 22px;
-
     bottom: 22px;
 
     z-index: 9999;
@@ -675,171 +679,171 @@
 
     text-decoration: none;
 
-    font-size: 24px;
+    line-height: 0;
 
     box-shadow:
-        0 8px 25px
-        rgba(0, 0, 0, 0.3);
+        0 8px 25px rgba(0, 0, 0, 0.3);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-
 }
 
 
 .footer-whatsapp:hover {
-
     transform: scale(1.08);
 
     box-shadow:
-        0 12px 30px
-        rgba(0, 0, 0, 0.4);
+        0 12px 30px rgba(0, 0, 0, 0.4);
+}
 
+
+.footer-whatsapp svg {
+    width: 24px;
+    height: 24px;
+
+    display: block;
 }
 
 
 /* =========================================================
    TABLET
+   701px - 1000px
+
+   BRAND + QUICK LINKS
+   CONTACT BELOW
 ========================================================= */
 
 @media (max-width: 1000px) {
 
+    .footer-container {
+        width: calc(100% - 40px);
+    }
+
+
+    .footer-main {
+        padding: 32px 0 30px;
+    }
+
+
     .footer-grid {
 
         grid-template-columns:
-            repeat(2, 1fr);
+            minmax(0, 1fr)
+            minmax(0, 1fr);
 
-        gap: 45px;
+        grid-template-areas:
+            "brand links"
+            "contact contact";
 
+        gap: 30px 45px;
+
+        align-items: start;
     }
 
 
-    .footer-newsletter-form {
+    /* BRAND */
 
-        width: 380px;
-
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .footer-newsletter,
-    .footer-container,
-    .footer-bottom-container {
-
-        width: calc(100% - 32px);
-
-    }
-
-
-    /* NEWSLETTER */
-
-    .footer-newsletter {
-
-        padding: 30px 0;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 24px;
-
-    }
-
-
-    .footer-newsletter-box {
+    .footer-brand {
+        grid-area: brand;
 
         width: 100%;
 
-        gap: 10px;
-
+        max-width: 100%;
     }
 
 
-    .footer-mail-icon {
+    /* QUICK LINKS */
 
-        width: 48px;
-        height: 48px;
-
-        font-size: 21px;
-
-    }
-
-
-    .footer-newsletter-form {
-
+    .footer-column {
         width: 100%;
-
-        height: 50px;
-
     }
 
 
-    .footer-newsletter-form input {
+    .footer-column:nth-child(2) {
+        grid-area: links;
 
-        padding: 0 14px;
-
-        font-size: 11px;
-
+        text-align: center;
     }
 
 
-    .footer-newsletter-form button {
-
-        width: 55px;
-
-        font-size: 21px;
-
+    .footer-column:nth-child(2) h3 {
+        text-align: center;
     }
 
 
-    /* SOCIAL */
+    /*
+       QUICK LINKS IN ONE ROW
+    */
 
-    .footer-top-social {
+    .footer-column:nth-child(2) .footer-links {
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
 
         justify-content: center;
 
-        gap: 15px;
+        flex-wrap: wrap;
 
+        gap: 8px 18px;
     }
 
 
-    /* MAIN */
+    .footer-column:nth-child(2) .footer-links a {
 
-    .footer-main {
+        width: auto;
 
-        padding: 50px 0 42px;
+        white-space: nowrap;
 
+        font-size: 12px;
     }
 
 
-    .footer-grid {
+    .footer-column:nth-child(2) .footer-links a:hover {
+        transform: translateY(-1px);
 
-        grid-template-columns: 1fr;
-
-        gap: 38px;
-
+        padding-left: 0;
     }
 
 
-    .footer-brand {
+    /* CONTACT */
+
+    .footer-contact {
+        grid-area: contact;
+
+        width: 100%;
 
         max-width: 100%;
 
+        text-align: center;
+
+        padding-top: 4px;
     }
 
 
-    .footer-logo {
+    .footer-contact p {
+        margin-left: auto;
 
-        font-size: 28px;
+        margin-right: auto;
 
+        max-width: 650px;
+    }
+
+
+    /*
+       SOCIAL LOGOS CENTER
+    */
+
+    .footer-social-icons {
+
+        justify-content: center;
+
+        align-items: center;
+
+        margin-top: 14px;
     }
 
 
@@ -847,51 +851,412 @@
 
     .footer-bottom-container {
 
+        width: calc(100% - 40px);
+
         min-height: auto;
 
-        padding: 22px 0;
+        padding: 13px 0;
 
         flex-direction: column;
+
+        justify-content: center;
 
         align-items: center;
 
         text-align: center;
 
-        gap: 9px;
+        gap: 12px;
+    }
 
+
+    .footer-copyright {
+
+        flex: none;
+
+        width: 100%;
+
+        text-align: center;
     }
 
 
     .footer-payments {
 
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   401px - 700px
+
+   QUICK LINKS = HORIZONTAL
+   CONTACT = CENTER
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .footer-container {
+        width: calc(100% - 32px);
+    }
+
+
+    .footer-main {
+        padding: 29px 0 27px;
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "brand"
+            "links"
+            "contact";
+
+        gap: 25px;
+    }
+
+
+    /* =====================================================
+       BRAND
+    ====================================================== */
+
+    .footer-brand {
+
+        grid-area: brand;
+
+        width: 100%;
+
+        max-width: none;
+
+        text-align: center;
+    }
+
+
+    .footer-logo {
+        font-size: 26px;
+    }
+
+
+    .footer-brand p {
+
+        max-width: 520px;
+
+        margin: 0 auto 13px;
+
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+
+    .footer-menu-button {
+
+        min-height: 35px;
+
+        padding: 0 15px;
+
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       QUICK LINKS
+    ====================================================== */
+
+    .footer-column:nth-child(2) {
+
+        grid-area: links;
+
+        width: 100%;
+
+        text-align: center;
+
+        padding-top: 1px;
+    }
+
+
+    .footer-column:nth-child(2) h3 {
+
+        margin: 0 0 11px;
+
+        text-align: center;
+
+        font-size: 16px;
+    }
+
+
+    /*
+       THIS MAKES HOME / MENU / GALLERY / CONTACT
+       APPEAR IN ONE HORIZONTAL ROW.
+    */
+
+    .footer-column:nth-child(2) .footer-links {
+
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: center;
+
+        flex-wrap: nowrap;
+
+        gap: 0;
+    }
+
+
+    .footer-column:nth-child(2) .footer-links a {
+
+        width: auto;
+
+        flex: 0 0 auto;
+
+        padding: 0 9px;
+
+        font-size: 11px;
+
+        line-height: 1.4;
+
+        white-space: nowrap;
+
+        border-right: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+
+    .footer-column:nth-child(2) .footer-links a:last-child {
+
+        border-right: none;
+    }
+
+
+    .footer-column:nth-child(2) .footer-links a:hover {
+
+        transform: none;
+
+        padding-left: 9px;
+
+        padding-right: 9px;
+    }
+
+
+    /* =====================================================
+       CONTACT
+    ====================================================== */
+
+    .footer-contact {
+
+        grid-area: contact;
+
+        width: 100%;
+
+        max-width: none;
+
+        text-align: center;
+
+        padding-top: 0;
+    }
+
+
+    .footer-contact h3 {
+
+        margin-bottom: 11px;
+
+        text-align: center;
+
+        font-size: 16px;
+    }
+
+
+    .footer-contact p {
+
+        width: 100%;
+
+        max-width: 520px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+        margin-bottom: 7px;
+
+        text-align: center;
+
+        font-size: 12px;
+
+        line-height: 1.5;
+    }
+
+
+    /*
+       SOCIAL MEDIA LOGOS PERFECTLY CENTERED
+    */
+
+    .footer-social-icons {
+
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
         justify-content: center;
 
         gap: 9px;
 
+        margin-top: 14px;
     }
 
 
-    .footer-payments span {
+    .footer-social-icons a {
 
-        font-size: 12px;
+        width: 35px;
 
+        height: 35px;
+
+        flex: 0 0 35px;
     }
 
 
-    /* WHATSAPP */
+    .footer-social-icons a svg {
+
+        width: 17px;
+
+        height: 17px;
+    }
+
+
+    /* =====================================================
+       BOTTOM
+    ====================================================== */
+
+    .footer-bottom-container {
+
+        width: calc(100% - 32px);
+
+        min-height: auto;
+
+        padding: 14px 0 16px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap: 11px;
+    }
+
+
+    .footer-copyright {
+
+        width: 100%;
+
+        font-size: 10px;
+
+        line-height: 1.5;
+
+        text-align: center;
+    }
+
+
+    /* =====================================================
+       PAYMENT LOGOS
+    ====================================================== */
+
+    .footer-payments {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        gap: 6px;
+    }
+
+
+    .footer-payments .payment-logo {
+
+        min-width: 50px;
+
+        height: 27px;
+
+        padding: 3px 5px;
+    }
+
+
+    .footer-payments .payment-logo svg {
+
+        height: 17px;
+    }
+
+
+    .footer-payments .payment-paypal svg {
+        width: 56px;
+    }
+
+
+    .footer-payments .payment-visa svg {
+        width: 42px;
+    }
+
+
+    .footer-payments .payment-mastercard svg {
+        width: 50px;
+    }
+
+
+    .footer-payments .payment-discover svg {
+        width: 63px;
+    }
+
+
+    .footer-payments .payment-rupay svg {
+        width: 47px;
+    }
+
+
+    .footer-payments .payment-upi svg {
+        width: 35px;
+    }
+
+
+    /* =====================================================
+       WHATSAPP
+    ====================================================== */
 
     .footer-whatsapp {
 
-        right: 16px;
+        width: 45px;
 
-        bottom: 16px;
+        height: 45px;
 
-        width: 48px;
+        right: 15px;
 
-        height: 48px;
+        bottom: 15px;
+    }
 
-        font-size: 22px;
 
+    .footer-whatsapp svg {
+
+        width: 22px;
+
+        height: 22px;
     }
 
 }
@@ -899,267 +1264,311 @@
 
 /* =========================================================
    SMALL MOBILE
+   400px AND BELOW
 ========================================================= */
 
 @media (max-width: 400px) {
 
-    .footer-newsletter,
-    .footer-container,
-    .footer-bottom-container {
-
+    .footer-container {
         width: calc(100% - 24px);
-
     }
 
-
-    .footer-newsletter-box {
-
-        gap: 8px;
-
-    }
-
-
-    .footer-mail-icon {
-
-        width: 44px;
-        height: 44px;
-
-        font-size: 17px;
-
-    }
-
-
-    .footer-newsletter-form {
-
-        height: 46px;
-
-    }
-
-
-    .footer-newsletter-form input {
-
-        font-size: 12px;
-
-    }
-
-
-    .footer-brand p,
-    .footer-links a,
-    .footer-contact p {
-
-        font-size: 11px;
-
-    }
-
-
-    .footer-logo {
-
-        font-size: 17px;
-
-    }
-
-}
-
-/* =========================================================
-   FINAL COMPACT FOOTER OVERRIDE
-   CONTENT REMAINS THE SAME
-========================================================= */
-
-.footer-newsletter {
-    min-height: 85px;
-    gap: 20px;
-}
-
-.footer-mail-icon {
-    width: 46px;
-    height: 46px;
-    font-size: 20px;
-}
-
-.footer-newsletter-box {
-    gap: 12px;
-}
-
-.footer-newsletter-form {
-    width: 360px;
-    height: 44px;
-}
-
-.footer-newsletter-form input {
-    padding: 0 16px;
-    font-size: 13px;
-}
-
-.footer-newsletter-form button {
-    width: 55px;
-    font-size: 20px;
-}
-
-.footer-top-social {
-    gap: 20px;
-}
-
-.footer-top-social a {
-    width: 28px;
-    height: 28px;
-    font-size: 17px;
-}
-
-.footer-main {
-    padding: 35px 0 30px;
-}
-
-.footer-grid {
-    gap: 35px;
-}
-
-.footer-logo {
-    margin-bottom: 12px;
-    font-size: 27px;
-}
-
-.footer-brand p {
-    margin-bottom: 15px;
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.footer-menu-button {
-    min-height: 34px;
-    padding: 0 15px;
-    font-size: 11px;
-}
-
-.footer-column h3 {
-    margin-bottom: 14px;
-    font-size: 17px;
-}
-
-.footer-links {
-    gap: 9px;
-}
-
-.footer-links a {
-    font-size: 13px;
-}
-
-.footer-contact p {
-    margin-bottom: 8px;
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-.footer-social-icons {
-    gap: 9px;
-    margin-top: 13px;
-}
-
-.footer-social-icons a {
-    width: 30px;
-    height: 30px;
-    font-size: 12px;
-}
-
-.footer-bottom-container {
-    min-height: 55px;
-    gap: 15px;
-}
-
-.footer-copyright {
-    font-size: 11px;
-}
-
-.footer-payments {
-    gap: 12px;
-}
-
-.footer-payments span {
-    font-size: 12px;
-}
-
-.footer-whatsapp {
-    width: 48px;
-    height: 48px;
-    right: 22px;
-    bottom: 22px;
-    font-size: 22px;
-}
-
-@media (max-width: 1000px) {
-    .footer-newsletter {
-        min-height: 75px;
-    }
 
     .footer-main {
-        padding: 30px 0 25px;
+        padding: 25px 0 23px;
     }
 
-    .footer-grid {
-        gap: 30px;
-    }
-}
-
-@media (max-width: 700px) {
-    .footer-newsletter {
-        min-height: auto;
-        padding: 20px 0;
-        gap: 16px;
-    }
-
-    .footer-newsletter-form {
-        width: 100%;
-        height: 42px;
-    }
-
-    .footer-mail-icon {
-        width: 42px;
-        height: 42px;
-        font-size: 18px;
-    }
-
-    .footer-main {
-        padding: 30px 0 25px;
-    }
-
-    .footer-grid {
-        gap: 25px;
-    }
-
-    .footer-brand p {
-        margin-bottom: 12px;
-    }
-
-    .footer-column h3 {
-        margin-bottom: 11px;
-    }
-
-    .footer-bottom-container {
-        min-height: 48px;
-        padding: 10px 0;
-    }
-
-    .footer-whatsapp {
-        width: 45px;
-        height: 45px;
-        right: 15px;
-        bottom: 15px;
-    }
-}
-
-@media (max-width: 400px) {
-    .footer-newsletter {
-        padding: 16px 0;
-    }
-
-    .footer-main {
-        padding: 25px 0 20px;
-    }
 
     .footer-grid {
         gap: 22px;
     }
 
-    .footer-bottom-container {
-        min-height: 44px;
+
+    /* BRAND */
+
+    .footer-logo {
+        font-size: 23px;
     }
+
+
+    .footer-brand p {
+
+        font-size: 11px;
+
+        line-height: 1.55;
+    }
+
+
+    .footer-menu-button {
+
+        min-height: 33px;
+
+        padding: 0 13px;
+
+        font-size: 9px;
+    }
+
+
+    /* =====================================================
+       QUICK LINKS
+    ====================================================== */
+
+    .footer-column:nth-child(2) h3 {
+
+        font-size: 15px;
+
+        margin-bottom: 9px;
+    }
+
+
+    .footer-column:nth-child(2) .footer-links a {
+
+        padding-left: 6px;
+
+        padding-right: 6px;
+
+        font-size: 10px;
+    }
+
+
+    .footer-column:nth-child(2) .footer-links a:hover {
+
+        padding-left: 6px;
+
+        padding-right: 6px;
+    }
+
+
+    /* =====================================================
+       CONTACT
+    ====================================================== */
+
+    .footer-contact h3 {
+
+        font-size: 15px;
+
+        margin-bottom: 9px;
+    }
+
+
+    .footer-contact p {
+
+        font-size: 11px;
+
+        margin-bottom: 6px;
+    }
+
+
+    /* =====================================================
+       SOCIAL
+    ====================================================== */
+
+    .footer-social-icons {
+
+        gap: 7px;
+
+        margin-top: 11px;
+    }
+
+
+    .footer-social-icons a {
+
+        width: 32px;
+
+        height: 32px;
+
+        flex-basis: 32px;
+    }
+
+
+    .footer-social-icons a svg {
+
+        width: 15px;
+
+        height: 15px;
+    }
+
+
+    /* =====================================================
+       BOTTOM
+    ====================================================== */
+
+    .footer-bottom-container {
+
+        width: calc(100% - 24px);
+
+        padding: 12px 0 14px;
+
+        gap: 9px;
+    }
+
+
+    .footer-copyright {
+
+        font-size: 9px;
+
+        line-height: 1.4;
+    }
+
+
+    /* =====================================================
+       PAYMENTS
+    ====================================================== */
+
+    .footer-payments {
+
+        gap: 4px;
+    }
+
+
+    .footer-payments .payment-logo {
+
+        min-width: 44px;
+
+        height: 24px;
+
+        padding: 2px 4px;
+    }
+
+
+    .footer-payments .payment-logo svg {
+
+        height: 15px;
+    }
+
+
+    .footer-payments .payment-paypal svg {
+        width: 48px;
+    }
+
+
+    .footer-payments .payment-visa svg {
+        width: 35px;
+    }
+
+
+    .footer-payments .payment-mastercard svg {
+        width: 43px;
+    }
+
+
+    .footer-payments .payment-discover svg {
+        width: 55px;
+    }
+
+
+    .footer-payments .payment-rupay svg {
+        width: 40px;
+    }
+
+
+    .footer-payments .payment-upi svg {
+        width: 30px;
+    }
+
+
+    /* =====================================================
+       WHATSAPP
+    ====================================================== */
+
+    .footer-whatsapp {
+
+        width: 43px;
+
+        height: 43px;
+
+        right: 12px;
+
+        bottom: 12px;
+    }
+
+
+    .footer-whatsapp svg {
+
+        width: 20px;
+
+        height: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+   360px AND BELOW
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .footer-container {
+
+        width: calc(100% - 20px);
+    }
+
+
+    .footer-bottom-container {
+
+        width: calc(100% - 20px);
+    }
+
+
+    /* QUICK LINKS */
+
+    .footer-column:nth-child(2) .footer-links a {
+
+        padding-left: 5px;
+
+        padding-right: 5px;
+
+        font-size: 9px;
+    }
+
+
+    /* PAYMENTS */
+
+    .footer-payments {
+
+        gap: 3px;
+    }
+
+
+    .footer-payments .payment-logo {
+
+        min-width: 41px;
+
+        height: 23px;
+
+        padding: 2px 3px;
+    }
+
+
+    .footer-payments .payment-paypal svg {
+        width: 44px;
+    }
+
+
+    .footer-payments .payment-visa svg {
+        width: 32px;
+    }
+
+
+    .footer-payments .payment-mastercard svg {
+        width: 39px;
+    }
+
+
+    .footer-payments .payment-discover svg {
+        width: 51px;
+    }
+
+
+    .footer-payments .payment-rupay svg {
+        width: 37px;
+    }
+
+
+    .footer-payments .payment-upi svg {
+        width: 28px;
+    }
+
 }

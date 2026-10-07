@@ -31,3 +31,7 @@ media/
 .coverage
 htmlcov/
 .pytest_cache/
+
+data.json
+
+
